@@ -7,7 +7,7 @@ import { fetchGetToken } from "../../store/actions/userAction";
 const LoginComp = () => {
 	const [userName, setUserName] = useState("");
 	const [password, setPassword] = useState("");
-	const userState = useSelector((state) => state);
+	const userState = useSelector((state) => state.user);
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const submitHandler = (e) => {

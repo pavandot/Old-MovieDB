@@ -1,2 +1,4 @@
 export const GET_TOKEN = "GET_TOKEN";
 export const SET_SESSION_ID = "SET_SESSION_ID";
+export const SET_PROGRESS_BAR = "SET_PROGRESS_BAR";
+export const GET_USER_DETAILS = "GET_USER_DETAILS";
