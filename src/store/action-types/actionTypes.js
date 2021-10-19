@@ -2,3 +2,5 @@ export const GET_TOKEN = "GET_TOKEN";
 export const SET_SESSION_ID = "SET_SESSION_ID";
 export const SET_PROGRESS_BAR = "SET_PROGRESS_BAR";
 export const GET_USER_DETAILS = "GET_USER_DETAILS";
+export const GET_TV_DETAILS = "GET_TV_DETAILS";
+export const GET_MOVIE_DETAILS = "GET_MOVIE_DETAILS";

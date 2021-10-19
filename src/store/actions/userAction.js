@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Actions Types
-import { GET_TOKEN, SET_SESSION_ID, SET_PROGRESS_BAR, GET_USER_DETAILS } from "../action-types/actionTypes";
+import { GET_TOKEN, SET_SESSION_ID, SET_PROGRESS_BAR, GET_USER_DETAILS, GET_MOVIE_DETAILS, GET_TV_DETAILS } from "../action-types/actionTypes";
 
 // UI Actions //
 // Setting Progress Value
@@ -68,4 +68,39 @@ export const fetchUser = (sessionId) => async (dispatch, getState) => {
 	const imgAddress = res.data.avatar.gravatar.hash;
 	const img = `https://secure.gravatar.com/avatar/${imgAddress}.jpg?s=64`;
 	dispatch(setUserDetails({ id, userName, img }));
+};
+
+// Fetching Movies and Tv details
+const getMovieDetails = (data) => ({ type: GET_MOVIE_DETAILS, payload: data });
+const getTvDetails = (data) => ({ type: GET_TV_DETAILS, payload: data });
+
+export const fetchMedialDetails = (mediaType) => (dispatch, getState) => {
+	axios.get(`https://api.themoviedb.org/3/${mediaType}/popular?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`).then((res) => {
+		let data = [];
+		if (res.data.results) {
+			res.data.results.forEach((element) => {
+				const posterImg = `https://image.tmdb.org/t/p/w200${element.poster_path}`;
+				const rating = element.vote_average * 10;
+				const month_names_short = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+				let dateSplit = "";
+				let title = "";
+				if (mediaType === "movie") {
+					dateSplit = element.release_date.split("-");
+					title = element.title;
+				} else {
+					dateSplit = element.first_air_date.split("-");
+					title = element.name;
+				}
+
+				const date = `${month_names_short[parseInt(dateSplit[1]) - 1]} ${dateSplit[2]}, ${dateSplit[0]}`;
+				data = [...data, { id: element.id, title, posterImg, rating, date }];
+			});
+		}
+		if (mediaType === "movie") {
+			dispatch(getMovieDetails(data));
+		}
+		if (mediaType === "tv") {
+			dispatch(getTvDetails(data));
+		}
+	});
 };
