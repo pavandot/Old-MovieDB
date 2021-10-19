@@ -1,7 +1,7 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { FaArrowUp } from "react-icons/fa";
-import "./Footer.css";
+
+// component
 const Footer = () => {
 	return (
 		<div className='bg-primary text-white flex justify-between px-10 items-center h-16'>

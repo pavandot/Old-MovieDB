@@ -1,29 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router";
-
-// actions
-import { fetchGetToken } from "../../store/actions/userAction";
-const LoginComp = () => {
-	const [userName, setUserName] = useState("");
-	const [password, setPassword] = useState("");
-	const userState = useSelector((state) => state.user);
-	const history = useHistory();
-	const dispatch = useDispatch();
-	const submitHandler = (e) => {
-		e.preventDefault();
-		const userDetails = {
-			userName,
-			password,
-		};
-		dispatch(fetchGetToken(userDetails));
-	};
-	useEffect(() => {
-		if (userState.sessionId) {
-			localStorage.setItem("sessionId", userState.sessionId);
-			history.replace("/");
-		}
-	}, [history, userState.sessionId]);
+// component
+const LoginComp = ({ userName, setUserName, password, setPassword, submitHandler }) => {
 	return (
 		<section className='px-10 py-7 '>
 			<h1 className='text-2xl font-semibold pb-1'>Login to your account</h1>

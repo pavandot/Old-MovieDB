@@ -1,5 +1,4 @@
-import React from "react";
-
+// component
 const HomeHero = () => {
 	return (
 		<section className=' h-80 relative overflow-hidden mt-16'>
