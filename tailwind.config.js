@@ -7,6 +7,9 @@ module.exports = {
 				primary: "#032541",
 				secondary: "#2DBBD0",
 			},
+			fontFamily: {
+				sans: ["Source Sans Pro", "sans-serif"],
+			},
 		},
 	},
 	variants: {

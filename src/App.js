@@ -6,15 +6,12 @@ import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
 import Home from "./pages/home/Home";
 import Login from "./pages/Login/Login";
-import Loader from "./components/loader/Loader";
 
 import { useDispatch } from "react-redux";
 import { fetchUser, setSessionId } from "./store/actions/userAction";
 
-import { useSelector } from "react-redux";
 const sessionId = localStorage.getItem("sessionId");
 function App() {
-	const ui = useSelector((state) => state.ui);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		if (!!sessionId) {
@@ -26,7 +23,7 @@ function App() {
 		<section>
 			<Router>
 				<Navbar />
-				{!ui.isHide && <Loader percentage={ui.progress} />}
+				{/* {!ui.isHide && <Loader percentage={ui.progress} />} */}
 				<Switch>
 					<Route exact path='/'>
 						<Home />
