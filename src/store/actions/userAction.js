@@ -79,7 +79,7 @@ export const fetchMedialDetails = (mediaType) => (dispatch, getState) => {
 		let data = [];
 		if (res.data.results) {
 			res.data.results.forEach((element) => {
-				const posterImg = `https://image.tmdb.org/t/p/w200${element.poster_path}`;
+				const posterImg = `https://image.tmdb.org/t/p/w300${element.poster_path}`;
 				const rating = element.vote_average * 10;
 				const month_names_short = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 				let dateSplit = "";
