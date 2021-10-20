@@ -6,6 +6,7 @@ import { fetchMedialDetails } from "../../store/actions/userAction";
 // Components
 import HomeHero from "../../components/home/HomeHero";
 import HomeShowcase from "../../components/home/HomeShowcase";
+import HomePages from "../../components/home/HomePages";
 
 import "./Home.css";
 import { useDispatch } from "react-redux";
@@ -13,10 +14,10 @@ import { useDispatch } from "react-redux";
 const Home = () => {
 	const movies = useSelector((state) => state.user.movies);
 	const tv = useSelector((state) => state.user.tv);
+	const sessionId = useSelector((state) => state.user.sessionId);
 	const dispatch = useDispatch();
 	const [isMovie, setIsMovie] = useState(true);
-	const [isFavorite, setIsFavorite] = useState(false);
-	const [isWatchList, setIsWatchList] = useState(false);
+	const [isActive, setIsActive] = useState(1);
 
 	useEffect(() => {
 		dispatch(fetchMedialDetails("movie", 1));
@@ -25,10 +26,12 @@ const Home = () => {
 	const switchToMovies = () => {
 		dispatch(fetchMedialDetails("movie", 1));
 		setIsMovie(true);
+		setIsActive(1);
 	};
 	const switchToTv = () => {
 		dispatch(fetchMedialDetails("tv", 1));
 		setIsMovie(false);
+		setIsActive(1);
 	};
 	return (
 		<div className=''>
@@ -50,7 +53,7 @@ const Home = () => {
 					movies.map((movie) => {
 						return (
 							<div key={movie.id} className='m-3'>
-								<HomeShowcase isFavorite={isFavorite} setIsFavorite={setIsFavorite} Media={movie} />
+								<HomeShowcase Media={movie} sessionId={sessionId} />
 							</div>
 						);
 					})}
@@ -59,10 +62,13 @@ const Home = () => {
 					tv.map((tv) => {
 						return (
 							<div key={tv.id} className='m-3'>
-								<HomeShowcase isFavorite={isFavorite} setIsFavorite={setIsFavorite} Media={tv} />
+								<HomeShowcase Media={tv} sessionId={sessionId} />
 							</div>
 						);
 					})}
+			</div>
+			<div>
+				<HomePages isMovie={isMovie} isActive={isActive} setIsActive={setIsActive} />
 			</div>
 		</div>
 	);

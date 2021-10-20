@@ -3,8 +3,11 @@ import { BsFillBookmarkCheckFill, BsBookmark, BsThreeDots } from "react-icons/bs
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { useState } from "react";
-const HomeShowcase = ({ isFavorite, setIsFavorite, Media }) => {
+import { useSelector } from "react-redux";
+const HomeShowcase = ({ Media, sessionId }) => {
 	const [isMovieMenu, setIsMovieMenu] = useState(false);
+	const [isFavorite, setIsFavorite] = useState(false);
+	const [isWatchList, setIsWatchList] = useState(false);
 	const { id, title, posterImg, rating, date } = Media;
 	let color = rating > 70 ? "#21D07A" : "#D2D531";
 
@@ -12,9 +15,11 @@ const HomeShowcase = ({ isFavorite, setIsFavorite, Media }) => {
 		<section className='inline-block h-72'>
 			<div className='rounded-lg  relative h-full '>
 				<img src={posterImg} alt={title} className='rounded-lg h-full w-full object-fill' />
-				<div className='absolute top-3 right-3 cursor-pointer hover:bg-secondary transition duration-300 p-1 bg-gray-300 rounded-full ' onClick={() => setIsMovieMenu(!isMovieMenu)}>
-					<BsThreeDots />
-				</div>
+				{!!sessionId && (
+					<div className='absolute top-3 right-3 cursor-pointer hover:bg-secondary transition duration-300 p-1 bg-gray-300 rounded-full ' onClick={() => setIsMovieMenu(!isMovieMenu)}>
+						<BsThreeDots />
+					</div>
+				)}
 				{isMovieMenu && (
 					<div className='absolute top-[45px] right-[-20px] bg-white rounded border-2'>
 						<div className='px-3 py-1 hover:bg-gray-200 '>
@@ -27,10 +32,10 @@ const HomeShowcase = ({ isFavorite, setIsFavorite, Media }) => {
 							</p>
 						</div>
 						<div className=' px-3 py-1 hover:bg-gray-200 '>
-							<p className=' flex justify-start items-center cursor-pointer' onClick={() => setIsFavorite(!isFavorite)}>
+							<p className=' flex justify-start items-center cursor-pointer' onClick={() => setIsWatchList(!isWatchList)}>
 								<span className='pr-2'>
-									{!isFavorite && <AiOutlineHeart />}
-									{isFavorite && <AiFillHeart className=' text-red-500 cursor-pointer' />}
+									{!isWatchList && <BsBookmark />}
+									{isWatchList && <BsFillBookmarkCheckFill className='cursor-pointer' />}
 								</span>
 								Watch List
 							</p>

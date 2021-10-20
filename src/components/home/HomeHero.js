@@ -1,7 +1,7 @@
 // component
 const HomeHero = () => {
 	return (
-		<section className=' h-80 relative overflow-hidden mt-16'>
+		<section className=' h-80 relative overflow-hidden mt-16' id='media-top'>
 			<img src='https://image.tmdb.org/t/p/original/VuukZLgaCrho2Ar8Scl9HtV3yD.jpg' alt='img' className='w-full bg-contain ' />
 			<div className='absolute bg-primary top-0 bottom-0 left-0 w-full bg-opacity-60'>
 				<div className='m-10 '>

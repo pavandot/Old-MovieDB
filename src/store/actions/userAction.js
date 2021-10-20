@@ -74,8 +74,8 @@ export const fetchUser = (sessionId) => async (dispatch, getState) => {
 const getMovieDetails = (data) => ({ type: GET_MOVIE_DETAILS, payload: data });
 const getTvDetails = (data) => ({ type: GET_TV_DETAILS, payload: data });
 
-export const fetchMedialDetails = (mediaType) => (dispatch, getState) => {
-	axios.get(`https://api.themoviedb.org/3/${mediaType}/popular?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`).then((res) => {
+export const fetchMedialDetails = (mediaType, page) => (dispatch, getState) => {
+	axios.get(`https://api.themoviedb.org/3/${mediaType}/popular?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=${page}`).then((res) => {
 		let data = [];
 		if (res.data.results) {
 			res.data.results.forEach((element) => {
