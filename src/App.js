@@ -11,8 +11,6 @@ import Login from "./pages/Login/Login";
 // Actions
 import { fetchUser, setSessionId } from "./store/actions/userAction";
 
-import "./App.css";
-
 const sessionId = localStorage.getItem("sessionId");
 function App() {
 	const dispatch = useDispatch();

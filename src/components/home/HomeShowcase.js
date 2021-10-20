@@ -16,7 +16,7 @@ const HomeShowcase = ({ isFavorite, setIsFavorite, Media }) => {
 					<BsThreeDots />
 				</div>
 				{isMovieMenu && (
-					<div className='absolute movie-menu bg-white rounded border-2'>
+					<div className='absolute top-[45px] right-[-20px] bg-white rounded border-2'>
 						<div className='px-3 py-1 hover:bg-gray-200 '>
 							<p className=' flex justify-start items-center cursor-pointer' onClick={() => setIsFavorite(!isFavorite)}>
 								<span className='pr-2'>
@@ -38,7 +38,7 @@ const HomeShowcase = ({ isFavorite, setIsFavorite, Media }) => {
 					</div>
 				)}
 
-				<div className='w-10 font-bold absolute z-40 rating-position'>
+				<div className='w-10 font-bold absolute z-40 bottom-[-18px] left-[10px]'>
 					<CircularProgressbar
 						value={rating}
 						text={`${rating}%`}
