@@ -27,7 +27,7 @@ const Login = () => {
 
 	useEffect(() => {
 		if (userState.sessionId) {
-			localStorage.setItem("sessionId", userState.sessionId);
+			// localStorage.setItem("sessionId", userState.sessionId);
 			history.replace("/");
 		}
 	}, [history, userState.sessionId]);

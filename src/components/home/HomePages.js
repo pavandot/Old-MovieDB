@@ -1,9 +1,9 @@
-import React from "react";
 import { useScrollTo } from "react-use-window-scroll";
 import { useDispatch } from "react-redux";
 // actions
 import { fetchMedialDetails } from "../../store/actions/userAction";
-const HomePages = ({ isMovie, isActive, setIsActive }) => {
+
+const HomePages = ({ isMovie, isActive, setIsActive, sessionId }) => {
 	const scrollTo = useScrollTo();
 	const dispatch = useDispatch();
 	const btnHandler = (number) => {
@@ -11,10 +11,10 @@ const HomePages = ({ isMovie, isActive, setIsActive }) => {
 		const page = parseInt(number);
 		setIsActive(page);
 		if (isMovie) {
-			dispatch(fetchMedialDetails("movie", number));
+			dispatch(fetchMedialDetails("movie", page, sessionId));
 		}
 		if (!isMovie) {
-			dispatch(fetchMedialDetails("tv", page));
+			dispatch(fetchMedialDetails("tv", page, sessionId));
 		}
 	};
 	return (

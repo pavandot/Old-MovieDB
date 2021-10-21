@@ -3,9 +3,6 @@ import axios from "axios";
 // Actions Types
 import { GET_TOKEN, SET_SESSION_ID, SET_PROGRESS_BAR, GET_USER_DETAILS, GET_MOVIE_DETAILS, GET_TV_DETAILS, GET_FAVORITE_MOVIES, GET_FAVORITE_TV } from "../action-types/actionTypes";
 
-// sessionID
-const sessionId = localStorage.getItem("sessionId");
-
 // UI Actions //
 
 // Setting Progress Value
@@ -35,11 +32,12 @@ export const fetchGetToken = (userDetails) => async (dispatch) => {
 		const payload = { request_token: verifiedToken };
 
 		// Get the Session Id
-		const UserSessionID = await axios.post(`${url}/session/new?api_key=${process.env.REACT_APP_API_KEY}`, payload).then((res) => res.data.session_id);
+		const userSessionID = await axios.post(`${url}/session/new?api_key=${process.env.REACT_APP_API_KEY}`, payload).then((res) => res.data.session_id);
 		dispatch(setProgress({ progress: 80, isHide: false }));
+		localStorage.setItem("sessionId", userSessionID);
 
 		// Get The User Details
-		const user = await axios.get(`https://api.themoviedb.org/3/account?api_key=${process.env.REACT_APP_API_KEY}&session_id=${UserSessionID}`).then((res) => res.data);
+		const user = await axios.get(`https://api.themoviedb.org/3/account?api_key=${process.env.REACT_APP_API_KEY}&session_id=${userSessionID}`).then((res) => res.data);
 		dispatch(setProgress({ progress: 100, isHide: true }));
 		const id = user.id;
 		const userName = user.username;
@@ -47,7 +45,7 @@ export const fetchGetToken = (userDetails) => async (dispatch) => {
 		const img = `https://secure.gravatar.com/avatar/${imgAddress}.jpg?s=64`;
 
 		// Update the store
-		dispatch(getToken({ token, sessionId: UserSessionID, user: { id, userName, img } }));
+		dispatch(getToken({ token, sessionId: userSessionID, user: { id, userName, img } }));
 	} catch (error) {
 		console.log(error);
 	}
@@ -115,20 +113,14 @@ export const getMovieDetails = (data) => ({ type: GET_MOVIE_DETAILS, payload: da
 export const getTvDetails = (data) => ({ type: GET_TV_DETAILS, payload: data });
 
 export const fetchMedialDetails = (mediaType, page, session_id) => (dispatch, getState) => {
-	let notNullSessionId = 0;
-	if (!!sessionId) {
-		notNullSessionId = sessionId;
-	}
-	if (!!session_id) {
-		notNullSessionId = session_id;
-	}
 	axios.get(`https://api.themoviedb.org/3/${mediaType}/popular?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=${page}`).then((res) => {
 		let data = [];
 		if (res.data.results) {
 			res.data.results.forEach((element) => {
-				if (notNullSessionId) {
-					axios.get(`https://api.themoviedb.org/3/${mediaType}/${element.id}/account_states?api_key=${process.env.REACT_APP_API_KEY}&session_id=${notNullSessionId}`).then((res) => {
+				if (session_id) {
+					axios.get(`https://api.themoviedb.org/3/${mediaType}/${element.id}/account_states?api_key=${process.env.REACT_APP_API_KEY}&session_id=${session_id}`).then((res) => {
 						const isFavorite = res.data.favorite;
+						console.log(res.data.favorite);
 						const posterImg = `https://image.tmdb.org/t/p/w300${element.poster_path}`;
 						const rating = element.vote_average * 10;
 						const month_names_short = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -189,14 +181,7 @@ export const fetchMedialDetails = (mediaType, page, session_id) => (dispatch, ge
 const getFavoriteMovies = (data) => ({ type: GET_FAVORITE_MOVIES, payload: data });
 const getFavoriteTv = (data) => ({ type: GET_FAVORITE_TV, payload: data });
 export const fetchFavorites = (mediaType, page, session_id) => (dispatch, getState) => {
-	let notNullSessionId = 0;
-	if (!!sessionId) {
-		notNullSessionId = sessionId;
-	}
-	if (!!session_id) {
-		notNullSessionId = session_id;
-	}
-	axios.get(`https://api.themoviedb.org/3/account/%7Baccount_id%7D/favorite/${mediaType}?api_key=${process.env.REACT_APP_API_KEY}&session_id=${notNullSessionId}&language=en-US&page=1`).then((res) => {
+	axios.get(`https://api.themoviedb.org/3/account/%7Baccount_id%7D/favorite/${mediaType}?api_key=${process.env.REACT_APP_API_KEY}&session_id=${session_id}&language=en-US&page=1`).then((res) => {
 		let data = [];
 		if (res.data.results) {
 			let totalPage = res.data.total_pages;
@@ -229,12 +214,5 @@ export const fetchFavorites = (mediaType, page, session_id) => (dispatch, getSta
 
 //
 export const toggleFavorites = (body, session_id) => (dispatch, getState) => {
-	let notNullSessionId = 0;
-	if (!!sessionId) {
-		notNullSessionId = sessionId;
-	}
-	if (!!session_id) {
-		notNullSessionId = session_id;
-	}
-	axios.post(`https://api.themoviedb.org/3/account/11236813/favorite?api_key=${process.env.REACT_APP_API_KEY}&session_id=${notNullSessionId}`, body).then((res) => {});
+	axios.post(`https://api.themoviedb.org/3/account/11236813/favorite?api_key=${process.env.REACT_APP_API_KEY}&session_id=${session_id}`, body).then((res) => {});
 };

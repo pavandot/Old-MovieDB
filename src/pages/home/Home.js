@@ -69,7 +69,7 @@ const Home = () => {
 					})}
 			</div>
 			<div>
-				<HomePages isMovie={isMovie} isActive={isActive} setIsActive={setIsActive} />
+				<HomePages isMovie={isMovie} isActive={isActive} setIsActive={setIsActive} sessionId={sessionId} />
 			</div>
 		</div>
 	);
