@@ -3,69 +3,11 @@ import { BsFillBookmarkCheckFill, BsBookmark, BsThreeDots } from "react-icons/bs
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { useState } from "react";
-// import { GET_MOVIE_DETAILS } from "../../store/action-types/actionTypes";
-import { toggleFavorites, getMovieDetails, getTvDetails } from "../../store/actions/userAction";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-const HomeShowcase = ({ Media, sessionId, isMovie, index }) => {
-	const movies = useSelector((state) => state.user.movies);
-	const tv = useSelector((state) => state.user.tv);
+const FavoritesComp = ({ Media, sessionId, moviesIdList, tvIdList, isMovie }) => {
 	const [isMovieMenu, setIsMovieMenu] = useState(false);
+	const [isFavorite, setIsFavorite] = useState(false);
 	const [isWatchList, setIsWatchList] = useState(false);
-	const { id, title, posterImg, rating, date, isFavorite } = Media;
-	const dispatch = useDispatch();
-	let alterData = [];
-	if (isMovie) {
-		alterData = movies;
-	}
-	if (!isMovie) {
-		alterData = tv;
-	}
-	const favoriteHandler = () => {
-		setIsMovieMenu(false);
-		if (isMovie) {
-			if (isFavorite) {
-				const data = {
-					media_type: "movie",
-					media_id: id,
-					favorite: false,
-				};
-				alterData[index].isFavorite = false;
-				dispatch(getMovieDetails(alterData));
-				dispatch(toggleFavorites(data, sessionId));
-			} else {
-				const data = {
-					media_type: "movie",
-					media_id: id,
-					favorite: true,
-				};
-				alterData[index].isFavorite = true;
-				dispatch(getMovieDetails(alterData));
-				dispatch(toggleFavorites(data, sessionId));
-			}
-		}
-		if (!isMovie) {
-			if (isFavorite) {
-				const data = {
-					media_type: "tv",
-					media_id: id,
-					favorite: false,
-				};
-				alterData[index].isFavorite = false;
-				dispatch(getTvDetails(alterData));
-				dispatch(toggleFavorites(data, sessionId));
-			} else {
-				const data = {
-					media_type: "tv",
-					media_id: id,
-					favorite: true,
-				};
-				alterData[index].isFavorite = true;
-				dispatch(getTvDetails(alterData));
-				dispatch(toggleFavorites(data, sessionId));
-			}
-		}
-	};
+	const { id, title, posterImg, rating, date } = Media;
 
 	return (
 		<section className='inline-block h-72'>
@@ -79,7 +21,7 @@ const HomeShowcase = ({ Media, sessionId, isMovie, index }) => {
 				{isMovieMenu && (
 					<div className='absolute top-[45px] right-[-20px] bg-white rounded border-2'>
 						<div className='px-3 py-1 hover:bg-gray-200 '>
-							<p className=' flex justify-start items-center cursor-pointer' onClick={favoriteHandler}>
+							<p className=' flex justify-start items-center cursor-pointer' onClick={() => setIsFavorite(!isFavorite)}>
 								<span className='pr-2'>
 									{!isFavorite && <AiOutlineHeart />}
 									{isFavorite && <AiFillHeart className=' text-red-500 cursor-pointer' />}
@@ -123,4 +65,4 @@ const HomeShowcase = ({ Media, sessionId, isMovie, index }) => {
 	);
 };
 
-export default HomeShowcase;
+export default FavoritesComp;

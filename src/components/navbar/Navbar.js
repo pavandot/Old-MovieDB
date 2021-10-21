@@ -35,7 +35,11 @@ const Navbar = () => {
 				</div>
 				<div className='right flex space-x-10 items-center text-lg'>
 					{!!sessionId && <h1 className='pointer font-semibold'>Watch List</h1>}
-					{!!sessionId && <h1 className='pointer font-semibold'>Favorite</h1>}
+					{!!sessionId && (
+						<Link to='/favorites'>
+							<h1 className='pointer font-semibold'>Favorite</h1>
+						</Link>
+					)}
 					{!!!sessionId && (
 						<Link to='/login'>
 							<h1 className='pointer font-semibold'>Login</h1>

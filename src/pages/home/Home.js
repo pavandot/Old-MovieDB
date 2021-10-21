@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+//
+
 // actions
 import { fetchMedialDetails } from "../../store/actions/userAction";
-
 // Components
 import HomeHero from "../../components/home/HomeHero";
 import HomeShowcase from "../../components/home/HomeShowcase";
@@ -20,16 +21,16 @@ const Home = () => {
 	const [isActive, setIsActive] = useState(1);
 
 	useEffect(() => {
-		dispatch(fetchMedialDetails("movie", 1));
-		dispatch(fetchMedialDetails("tv", 1));
-	}, [dispatch]);
+		dispatch(fetchMedialDetails("movie", 1, sessionId));
+		dispatch(fetchMedialDetails("tv", 1, sessionId));
+	}, [dispatch, sessionId]);
 	const switchToMovies = () => {
-		dispatch(fetchMedialDetails("movie", 1));
+		dispatch(fetchMedialDetails("movie", 1, sessionId));
 		setIsMovie(true);
 		setIsActive(1);
 	};
 	const switchToTv = () => {
-		dispatch(fetchMedialDetails("tv", 1));
+		dispatch(fetchMedialDetails("tv", 1, sessionId));
 		setIsMovie(false);
 		setIsActive(1);
 	};
@@ -50,19 +51,19 @@ const Home = () => {
 			<div className='grid grid-cols-5 m-10'>
 				{isMovie &&
 					!!movies &&
-					movies.map((movie) => {
+					movies.map((movie, index) => {
 						return (
 							<div key={movie.id} className='m-3'>
-								<HomeShowcase Media={movie} sessionId={sessionId} />
+								<HomeShowcase Media={movie} sessionId={sessionId} isMovie={isMovie} index={index} />
 							</div>
 						);
 					})}
 				{!isMovie &&
 					!!tv &&
-					tv.map((tv) => {
+					tv.map((tv, index) => {
 						return (
 							<div key={tv.id} className='m-3'>
-								<HomeShowcase Media={tv} sessionId={sessionId} />
+								<HomeShowcase Media={tv} sessionId={sessionId} isMovie={isMovie} index={index} />
 							</div>
 						);
 					})}
