@@ -7,7 +7,7 @@ const FavoritesComp = ({ Media, sessionId, moviesIdList, tvIdList, isMovie }) =>
 	const [isMovieMenu, setIsMovieMenu] = useState(false);
 	const [isFavorite, setIsFavorite] = useState(false);
 	const [isWatchList, setIsWatchList] = useState(false);
-	const { id, title, posterImg, rating, date } = Media;
+	const { title, posterImg, rating, date } = Media;
 
 	return (
 		<section className='inline-block h-72'>
