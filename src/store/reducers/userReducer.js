@@ -1,4 +1,4 @@
-import { GET_TOKEN, SET_SESSION_ID, GET_USER_DETAILS, GET_MOVIE_DETAILS, GET_TV_DETAILS, GET_FAVORITE_MOVIES, GET_FAVORITE_TV } from "../action-types/actionTypes";
+import { GET_TOKEN, SET_SESSION_ID, GET_USER_DETAILS, GET_MOVIE_DETAILS, GET_TV_DETAILS, GET_FAVORITE_MOVIES, GET_FAVORITE_TV, CLEAR_STORE } from "../action-types/actionTypes";
 const initialState = {
 	user: {},
 	requestToken: 0,
@@ -30,6 +30,18 @@ export const userReducer = (state = initialState, actions) => {
 		}
 		case GET_FAVORITE_TV: {
 			return { ...state, favoriteTv: actions.payload };
+		}
+		case CLEAR_STORE: {
+			console.log("what");
+			return {
+				user: {},
+				requestToken: 0,
+				sessionId: 0,
+				movies: [],
+				tv: [],
+				favoriteMovies: [],
+				favoriteTv: [],
+			};
 		}
 		default: {
 			return state;

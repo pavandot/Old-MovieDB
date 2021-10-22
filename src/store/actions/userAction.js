@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Actions Types
-import { GET_TOKEN, SET_SESSION_ID, SET_PROGRESS_BAR, GET_USER_DETAILS, GET_MOVIE_DETAILS, GET_TV_DETAILS, GET_FAVORITE_MOVIES, GET_FAVORITE_TV } from "../action-types/actionTypes";
+import { GET_TOKEN, SET_SESSION_ID, SET_PROGRESS_BAR, GET_USER_DETAILS, GET_MOVIE_DETAILS, GET_TV_DETAILS, GET_FAVORITE_MOVIES, GET_FAVORITE_TV, CLEAR_STORE } from "../action-types/actionTypes";
 
 // UI Actions //
 
@@ -218,3 +218,6 @@ export const toggleFavorites = (body, session_id, media_type) => (dispatch, getS
 	console.log(session_id);
 	axios.post(`https://api.themoviedb.org/3/account/11236813/favorite?api_key=${process.env.REACT_APP_API_KEY}&session_id=${session_id}`, body).then((res) => {});
 };
+
+// Clear Redux Store
+export const clearReduxStore = () => ({ type: CLEAR_STORE });

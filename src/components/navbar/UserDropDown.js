@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
-import { setSessionId } from "../../store/actions/userAction";
+import { setSessionId, getFavoriteMovies, getFavoriteTv, clearReduxStore } from "../../store/actions/userAction";
 export const UserDropDown = ({ setIsOpen }) => {
 	const { userName, img } = useSelector((state) => state.user.user);
 	console.log(img);
@@ -13,7 +13,7 @@ export const UserDropDown = ({ setIsOpen }) => {
 	const clearSession = () => {
 		setIsOpen(false);
 		localStorage.clear();
-		dispatch(setSessionId(0));
+		dispatch(clearReduxStore());
 		history.replace("/");
 	};
 	return (
@@ -23,8 +23,8 @@ export const UserDropDown = ({ setIsOpen }) => {
 				<div className='p-2 hover:bg-gray-200 rounded transition duration-300 text-gray-800 font-medium cursor-pointer' onClick={() => setIsOpen(false)}>
 					<p>{userName}</p>
 				</div>
-				<div className='p-2 hover:bg-gray-200 rounded transition duration-300 text-gray-800 font-medium cursor-pointer' onClick={() => setIsOpen(false)}>
-					<Link to='/favorites' className='sm:hidden'>
+				<div className='p-2 hover:bg-gray-200 rounded transition duration-300 text-gray-800 font-medium cursor-pointer sm:hidden' onClick={() => setIsOpen(false)}>
+					<Link to='/favorites'>
 						<h1>Favorite</h1>
 					</Link>
 				</div>
