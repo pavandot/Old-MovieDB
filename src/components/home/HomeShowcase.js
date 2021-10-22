@@ -7,6 +7,7 @@ import { useState } from "react";
 import { toggleFavorites, getMovieDetails, getTvDetails } from "../../store/actions/userAction";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import "../../pages/home/Home.css";
 const HomeShowcase = ({ Media, sessionId, isMovie, index }) => {
 	const movies = useSelector((state) => state.user.movies);
 	const tv = useSelector((state) => state.user.tv);
@@ -77,7 +78,7 @@ const HomeShowcase = ({ Media, sessionId, isMovie, index }) => {
 					</div>
 				)}
 				{isMovieMenu && (
-					<div className='absolute top-[45px] right-[-20px] bg-white rounded border-2'>
+					<div className='absolute movie-menu  bg-white rounded border-2'>
 						<div className='px-3 py-1 hover:bg-gray-200 '>
 							<p className=' flex justify-start items-center cursor-pointer' onClick={favoriteHandler}>
 								<span className='pr-2'>
@@ -99,7 +100,7 @@ const HomeShowcase = ({ Media, sessionId, isMovie, index }) => {
 					</div>
 				)}
 
-				<div className='w-10 font-bold absolute z-40 bottom-[-18px] left-[10px]'>
+				<div className='w-10 font-bold absolute z-40 rating-position'>
 					<CircularProgressbar
 						value={rating}
 						text={`${rating}%`}

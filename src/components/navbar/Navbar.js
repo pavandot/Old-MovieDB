@@ -30,10 +30,10 @@ const Navbar = () => {
 					<Link to='/'>
 						<h1 className='logo pointer text-3xl font-bold text-style  '>MDB</h1>
 					</Link>
-					<h1 className='pointer font-semibold text-lg'>Movies</h1>
-					<h1 className='pointer font-semibold text-lg'>TV Shows</h1>
+					<h1 className='pointer font-semibold text-lg hidden sm:block'>Movies</h1>
+					<h1 className='pointer font-semibold text-lg hidden sm:block'>TV Shows</h1>
 				</div>
-				<div className='right flex space-x-10 items-center text-lg'>
+				<div className='right sm:flex space-x-10 items-center text-lg hidden'>
 					{!!sessionId && <h1 className='pointer font-semibold'>Watch List</h1>}
 					{!!sessionId && (
 						<Link to='/favorites'>

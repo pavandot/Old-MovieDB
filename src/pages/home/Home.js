@@ -37,7 +37,7 @@ const Home = () => {
 	return (
 		<div className=''>
 			<HomeHero />
-			<div className='m-10 flex items-center'>
+			<div className='m-5 sm:m-10 flex items-center'>
 				<p className='text-2xl font-semibold'>Popular</p>
 				<div className='flex items-center mx-5 border-2 border-primary rounded-3xl  justify-between'>
 					<div className={`py-1 px-3 ${isMovie ? "rounded-3xl bg-primary text-white " : "rounded-tl-3xl rounded-bl-3xl bg-white text-gray-800"} cursor-pointer `} onClick={switchToMovies}>
@@ -48,7 +48,7 @@ const Home = () => {
 					</div>
 				</div>
 			</div>
-			<div className='grid grid-cols-5 m-10'>
+			<div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 m-4 sm:m-6 md:m-10'>
 				{isMovie &&
 					!!movies &&
 					movies.map((movie, index) => {

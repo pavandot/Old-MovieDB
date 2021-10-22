@@ -178,8 +178,8 @@ export const fetchMedialDetails = (mediaType, page, session_id) => (dispatch, ge
 
 // Get Favorites movies and tv shows
 
-const getFavoriteMovies = (data) => ({ type: GET_FAVORITE_MOVIES, payload: data });
-const getFavoriteTv = (data) => ({ type: GET_FAVORITE_TV, payload: data });
+export const getFavoriteMovies = (data) => ({ type: GET_FAVORITE_MOVIES, payload: data });
+export const getFavoriteTv = (data) => ({ type: GET_FAVORITE_TV, payload: data });
 export const fetchFavorites = (mediaType, page, session_id) => (dispatch, getState) => {
 	axios.get(`https://api.themoviedb.org/3/account/%7Baccount_id%7D/favorite/${mediaType}?api_key=${process.env.REACT_APP_API_KEY}&session_id=${session_id}&language=en-US&page=1`).then((res) => {
 		let data = [];
@@ -191,6 +191,7 @@ export const fetchFavorites = (mediaType, page, session_id) => (dispatch, getSta
 				const month_names_short = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 				let dateSplit = "";
 				let title = "";
+				const overview = element.overview;
 				if (mediaType === "movies") {
 					dateSplit = element.release_date.split("-");
 					title = element.title;
@@ -200,7 +201,7 @@ export const fetchFavorites = (mediaType, page, session_id) => (dispatch, getSta
 				}
 
 				const date = `${month_names_short[parseInt(dateSplit[1]) - 1]} ${dateSplit[2]}, ${dateSplit[0]}`;
-				data = [...data, { id: element.id, title, posterImg, rating, date, totalPage }];
+				data = [...data, { id: element.id, title, posterImg, rating, date, overview, totalPage }];
 			});
 		}
 		if (mediaType === "movies") {
@@ -213,6 +214,7 @@ export const fetchFavorites = (mediaType, page, session_id) => (dispatch, getSta
 };
 
 //
-export const toggleFavorites = (body, session_id) => (dispatch, getState) => {
+export const toggleFavorites = (body, session_id, media_type) => (dispatch, getState) => {
+	console.log(session_id);
 	axios.post(`https://api.themoviedb.org/3/account/11236813/favorite?api_key=${process.env.REACT_APP_API_KEY}&session_id=${session_id}`, body).then((res) => {});
 };
