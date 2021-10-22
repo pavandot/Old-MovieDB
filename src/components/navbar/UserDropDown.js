@@ -15,6 +15,7 @@ export const UserDropDown = ({ setIsOpen }) => {
 		localStorage.clear();
 		dispatch(clearReduxStore());
 		history.replace("/");
+		window.location.reload();
 	};
 	return (
 		<div>
