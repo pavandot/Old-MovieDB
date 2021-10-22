@@ -103,8 +103,7 @@ export const fetchUser = (sessionId) => async (dispatch, getState) => {
 	const user = await axios.get(`https://api.themoviedb.org/3/account?api_key=${process.env.REACT_APP_API_KEY}&session_id=${sessionId}`).then((res) => res.data);
 	const id = user.id;
 	const userName = user.username;
-	const imgAddress = user.avatar.gravatar.hash;
-	const img = `https://secure.gravatar.com/avatar/${imgAddress}.jpg?s=64`;
+	const img = `https://secure.gravatar.com/avatar/${user.avatar.gravatar.hash}.jpg?s=64`;
 	dispatch(setUserDetails({ id, userName, img }));
 };
 
@@ -120,7 +119,7 @@ export const fetchMedialDetails = (mediaType, page, session_id) => (dispatch, ge
 				if (session_id) {
 					axios.get(`https://api.themoviedb.org/3/${mediaType}/${element.id}/account_states?api_key=${process.env.REACT_APP_API_KEY}&session_id=${session_id}`).then((res) => {
 						const isFavorite = res.data.favorite;
-						console.log(res.data.favorite);
+						// console.log(res.data.favorite);
 						const posterImg = `https://image.tmdb.org/t/p/w300${element.poster_path}`;
 						const rating = element.vote_average * 10;
 						const month_names_short = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -146,7 +145,8 @@ export const fetchMedialDetails = (mediaType, page, session_id) => (dispatch, ge
 						}
 					});
 				} else {
-					const isFavorite = res.data.favorite;
+					const isFavorite = false;
+					console.log(isFavorite);
 					const posterImg = `https://image.tmdb.org/t/p/w300${element.poster_path}`;
 					const rating = element.vote_average * 10;
 					const month_names_short = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
