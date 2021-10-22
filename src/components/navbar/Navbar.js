@@ -33,10 +33,10 @@ const Navbar = () => {
 					<h1 className='pointer font-semibold text-lg hidden sm:block'>Movies</h1>
 					<h1 className='pointer font-semibold text-lg hidden sm:block'>TV Shows</h1>
 				</div>
-				<div className='right sm:flex space-x-10 items-center text-lg hidden'>
-					{!!sessionId && <h1 className='pointer font-semibold'>Watch List</h1>}
+				<div className='right flex sm:space-x-10 items-center text-lg '>
+					{!!sessionId && <h1 className='pointer font-semibold hidden sm:block'>Watch List</h1>}
 					{!!sessionId && (
-						<Link to='/favorites'>
+						<Link to='/favorites' className='hidden sm:block'>
 							<h1 className='pointer font-semibold'>Favorite</h1>
 						</Link>
 					)}

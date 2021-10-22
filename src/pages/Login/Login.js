@@ -33,7 +33,7 @@ const Login = () => {
 	}, [history, userState.sessionId]);
 
 	return (
-		<section className='mt-16'>
+		<section className='mt-16 mb-28 sm:mb-0 '>
 			<LoginComp userName={userName} setUserName={setUserName} password={password} setPassword={setPassword} submitHandler={submitHandler} />
 		</section>
 	);

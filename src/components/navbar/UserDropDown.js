@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
@@ -21,6 +22,11 @@ export const UserDropDown = ({ setIsOpen }) => {
 			<section className='absolute right-3 top-16 min-w-24 rounded  bg-white text-black flex flex-col justify-between z-50'>
 				<div className='p-2 hover:bg-gray-200 rounded transition duration-300 text-gray-800 font-medium cursor-pointer' onClick={() => setIsOpen(false)}>
 					<p>{userName}</p>
+				</div>
+				<div className='p-2 hover:bg-gray-200 rounded transition duration-300 text-gray-800 font-medium cursor-pointer' onClick={() => setIsOpen(false)}>
+					<Link to='/favorites' className='sm:hidden'>
+						<h1>Favorite</h1>
+					</Link>
 				</div>
 				<div className='p-2 hover:bg-gray-200 rounded transition duration-300 text-gray-800 font-medium cursor-pointer' onClick={clearSession}>
 					<p>Logout</p>
