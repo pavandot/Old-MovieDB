@@ -12,8 +12,8 @@ const HomeHero = () => {
 	const submitHandler = (e) => {
 		e.preventDefault();
 		dispatch(getSearchResult(searchRef.current.value));
-		searchRef.current.value = "";
 		setTimeout(() => {
+			searchRef.current.value = "";
 			history.push("/search");
 		}, 750);
 	};
