@@ -13,9 +13,9 @@ const HomeHero = () => {
 		e.preventDefault();
 		dispatch(getSearchResult(searchRef.current.value));
 		searchRef.current.value = "";
-		if (!!searchResult.moviesRes) {
+		setTimeout(() => {
 			history.push("/search");
-		}
+		}, 750);
 	};
 	return (
 		<section className=' h-80 relative overflow-hidden mt-16' id='media-top'>

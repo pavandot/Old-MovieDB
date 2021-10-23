@@ -26,13 +26,17 @@ const Home = () => {
 	}, [dispatch, sessionId]);
 	const switchToMovies = () => {
 		dispatch(fetchMedialDetails("movie", 1, sessionId));
-		setIsMovie(true);
-		setIsActive(1);
+		setTimeout(() => {
+			setIsMovie(true);
+			setIsActive(1);
+		}, 700);
 	};
 	const switchToTv = () => {
 		dispatch(fetchMedialDetails("tv", 1, sessionId));
-		setIsMovie(false);
-		setIsActive(1);
+		setTimeout(() => {
+			setIsMovie(false);
+			setIsActive(1);
+		}, 700);
 	};
 	return (
 		<div className=''>
