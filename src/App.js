@@ -8,6 +8,7 @@ import Footer from "./components/footer/Footer";
 import Home from "./pages/home/Home";
 import Login from "./pages/Login/Login";
 import Favorites from "./pages/favorites/Favorites";
+import Search from "./pages/search/Search";
 
 // Actions
 import { fetchUser, setSessionId } from "./store/actions/userAction";
@@ -32,8 +33,11 @@ function App() {
 					<Route path='/favorites'>
 						<Favorites />
 					</Route>
-					<Route patch='/login'>
+					<Route path='/login'>
 						<Login />
+					</Route>
+					<Route path='/search'>
+						<Search />
 					</Route>
 				</Switch>
 				<Footer />

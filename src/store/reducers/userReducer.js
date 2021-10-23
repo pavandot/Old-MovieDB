@@ -1,4 +1,4 @@
-import { GET_TOKEN, SET_SESSION_ID, GET_USER_DETAILS, GET_MOVIE_DETAILS, GET_TV_DETAILS, GET_FAVORITE_MOVIES, GET_FAVORITE_TV, CLEAR_STORE } from "../action-types/actionTypes";
+import { GET_TOKEN, SET_SESSION_ID, GET_USER_DETAILS, GET_MOVIE_DETAILS, GET_TV_DETAILS, GET_FAVORITE_MOVIES, GET_FAVORITE_TV, CLEAR_STORE, SEARCH_RESULT } from "../action-types/actionTypes";
 const initialState = {
 	user: {},
 	requestToken: 0,
@@ -7,6 +7,7 @@ const initialState = {
 	tv: [],
 	favoriteMovies: [],
 	favoriteTv: [],
+	searchResult: { moviesRes: { movies: [], totalPages: 0, totalResult: 0 }, tvShows: {} },
 };
 export const userReducer = (state = initialState, actions) => {
 	switch (actions.type) {
@@ -27,6 +28,9 @@ export const userReducer = (state = initialState, actions) => {
 		}
 		case GET_FAVORITE_MOVIES: {
 			return { ...state, favoriteMovies: actions.payload };
+		}
+		case SEARCH_RESULT: {
+			return { ...state, searchResult: actions.payload };
 		}
 		case GET_FAVORITE_TV: {
 			return { ...state, favoriteTv: actions.payload };
