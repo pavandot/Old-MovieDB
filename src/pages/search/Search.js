@@ -45,7 +45,7 @@ const Search = () => {
 						movies.map((movie) => {
 							return (
 								<div key={movie.id}>
-									<SearchComp media={movie} />
+									<SearchComp media={movie} isMovie={isMovie} />
 								</div>
 							);
 						})}
@@ -54,7 +54,7 @@ const Search = () => {
 						tvShowsArr.map((tv) => {
 							return (
 								<div>
-									<SearchComp media={tv} />
+									<SearchComp media={tv} isMovie={isMovie} />
 								</div>
 							);
 						})}

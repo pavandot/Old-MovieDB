@@ -70,7 +70,12 @@ const HomeShowcase = ({ Media, sessionId, isMovie, index }) => {
 		}
 	};
 	const sendID = () => {
-		dispatch(getMovieById(id, history));
+		if (isMovie) {
+			dispatch(getMovieById(id, history, "movie"));
+		}
+		if (!isMovie) {
+			dispatch(getMovieById(id, history, "tv"));
+		}
 	};
 	return (
 		<section className='inline-block h-72'>

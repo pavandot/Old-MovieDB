@@ -293,28 +293,38 @@ export const getSearchResult = (keyWord) => async (dispatch, getState) => {
 // Get Movie
 const getMovie = (data) => ({ type: GET_MOVIE, payload: data });
 
-export const getMovieById = (id, history) => async (dispatch) => {
+export const getMovieById = (id, history, media) => async (dispatch) => {
 	try {
-		const movieData = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`).then((res) => res.data);
+		const movieData = await axios.get(`https://api.themoviedb.org/3/${media}/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`).then((res) => res.data);
 		console.log(movieData);
-		const title = movieData.title;
+		let title = "";
+		let releaseDate = "";
+		let totalRunTime = "";
+		if (media === "movie") {
+			title = movieData.title;
+			releaseDate = movieData.release_date.replaceAll("-", "/");
+			const runtime = movieData.runtime;
+			const hours = Math.floor(runtime / 60);
+			const minutes = runtime % 60;
+			totalRunTime = `${hours}h ${minutes}m`;
+		}
+		if (media === "tv") {
+			title = movieData.name;
+			releaseDate = movieData.first_air_date.replaceAll("-", "/");
+			totalRunTime = `${movieData.runtime}m`;
+		}
 		const rating = movieData.vote_average * 10;
-		const releaseDate = movieData.release_date.replaceAll("-", "/");
 		let genres = [];
 		movieData.genres.forEach((gen, index) => {
 			console.log(index);
 			if (index <= 1) {
-				console.log(gen.name);
 				genres.push(`${gen.name}`);
 			}
 		});
-		const runtime = movieData.runtime;
-		const hours = Math.floor(runtime / 60);
-		const minutes = runtime % 60;
-		const totalRunTime = `${hours}h ${minutes}m`;
+
 		const tagLine = movieData.tagline;
 		const overview = movieData.overview;
-		const posterPath = `https://image.tmdb.org/t/p/w500/${movieData.poster_path}`;
+		const posterPath = `https://image.tmdb.org/t/p/w400/${movieData.poster_path}`;
 		const backgroundPoster = `https://image.tmdb.org/t/p/w500/${movieData.backdrop_path}`;
 		const data = { title, rating, releaseDate, genres, totalRunTime, tagLine, overview, backgroundPoster, posterPath };
 		console.log(data);
