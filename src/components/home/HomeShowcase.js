@@ -4,10 +4,11 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { useState } from "react";
 // import { GET_MOVIE_DETAILS } from "../../store/action-types/actionTypes";
-import { toggleFavorites, getMovieDetails, getTvDetails } from "../../store/actions/userAction";
+import { toggleFavorites, getMovieDetails, getTvDetails, getMovieById } from "../../store/actions/userAction";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import "../../pages/home/Home.css";
+import { useHistory } from "react-router";
 const HomeShowcase = ({ Media, sessionId, isMovie, index }) => {
 	const movies = useSelector((state) => state.user.movies);
 	const tv = useSelector((state) => state.user.tv);
@@ -15,6 +16,7 @@ const HomeShowcase = ({ Media, sessionId, isMovie, index }) => {
 	const [isWatchList, setIsWatchList] = useState(false);
 	const { id, title, posterImg, rating, date, isFavorite } = Media;
 	const dispatch = useDispatch();
+	const history = useHistory();
 	let alterData = [];
 	if (isMovie) {
 		alterData = movies;
@@ -67,11 +69,13 @@ const HomeShowcase = ({ Media, sessionId, isMovie, index }) => {
 			}
 		}
 	};
-
+	const sendID = () => {
+		dispatch(getMovieById(id, history));
+	};
 	return (
 		<section className='inline-block h-72'>
 			<div className='rounded-lg  relative h-full '>
-				<img src={posterImg} alt={title} className='rounded-lg h-full w-full object-fill' />
+				<img src={posterImg} alt={title} className='rounded-lg h-full w-full object-fill cursor-pointer' onClick={sendID} />
 				{!!sessionId && (
 					<div className='absolute top-3 right-3 cursor-pointer hover:bg-secondary transition duration-300 p-1 bg-gray-300 rounded-full ' onClick={() => setIsMovieMenu(!isMovieMenu)}>
 						<BsThreeDots />

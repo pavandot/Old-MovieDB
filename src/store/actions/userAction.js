@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Actions Types
-import { GET_TOKEN, SET_SESSION_ID, SET_PROGRESS_BAR, GET_USER_DETAILS, GET_MOVIE_DETAILS, GET_TV_DETAILS, GET_FAVORITE_MOVIES, GET_FAVORITE_TV, CLEAR_STORE, SEARCH_RESULT } from "../action-types/actionTypes";
+import { GET_TOKEN, SET_SESSION_ID, SET_PROGRESS_BAR, GET_USER_DETAILS, GET_MOVIE_DETAILS, GET_TV_DETAILS, GET_FAVORITE_MOVIES, GET_FAVORITE_TV, CLEAR_STORE, SEARCH_RESULT, GET_MOVIE } from "../action-types/actionTypes";
 
 // UI Actions //
 
@@ -288,4 +288,39 @@ export const getSearchResult = (keyWord) => async (dispatch, getState) => {
 	});
 	const tvShowsResult = { tvShowsArr, tvTotalPages, tvTotalResult };
 	dispatch(setSearchResult({ moviesRes: moviesResults, tvShows: tvShowsResult }));
+};
+
+// Get Movie
+const getMovie = (data) => ({ type: GET_MOVIE, payload: data });
+
+export const getMovieById = (id, history) => async (dispatch) => {
+	try {
+		const movieData = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`).then((res) => res.data);
+		console.log(movieData);
+		const title = movieData.title;
+		const rating = movieData.vote_average * 10;
+		const releaseDate = movieData.release_date.replaceAll("-", "/");
+		let genres = [];
+		movieData.genres.forEach((gen, index) => {
+			console.log(index);
+			if (index <= 1) {
+				console.log(gen.name);
+				genres.push(`${gen.name}`);
+			}
+		});
+		const runtime = movieData.runtime;
+		const hours = Math.floor(runtime / 60);
+		const minutes = runtime % 60;
+		const totalRunTime = `${hours}h ${minutes}m`;
+		const tagLine = movieData.tagline;
+		const overview = movieData.overview;
+		const posterPath = `https://image.tmdb.org/t/p/w500/${movieData.poster_path}`;
+		const backgroundPoster = `https://image.tmdb.org/t/p/w500/${movieData.backdrop_path}`;
+		const data = { title, rating, releaseDate, genres, totalRunTime, tagLine, overview, backgroundPoster, posterPath };
+		console.log(data);
+		dispatch(getMovie(data));
+		history.push("/movie");
+	} catch (error) {
+		console.log(error);
+	}
 };

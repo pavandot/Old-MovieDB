@@ -8,6 +8,7 @@ module.exports = {
 			colors: {
 				primary: "#032541",
 				secondary: "#2DBBD0",
+				dark: "#202529",
 			},
 			fontFamily: {
 				sans: ["Source Sans Pro", "sans-serif"],

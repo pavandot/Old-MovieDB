@@ -9,6 +9,7 @@ import Home from "./pages/home/Home";
 import Login from "./pages/Login/Login";
 import Favorites from "./pages/favorites/Favorites";
 import Search from "./pages/search/Search";
+import Movie from "./pages/movie/Movie";
 
 // Actions
 import { fetchUser, setSessionId } from "./store/actions/userAction";
@@ -38,6 +39,9 @@ function App() {
 					</Route>
 					<Route path='/search'>
 						<Search />
+					</Route>
+					<Route path='/movie'>
+						<Movie />
 					</Route>
 				</Switch>
 				<Footer />

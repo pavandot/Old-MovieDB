@@ -22,7 +22,7 @@ const Home = () => {
 
 	useEffect(() => {
 		dispatch(fetchMedialDetails("movie", 1, sessionId));
-		dispatch(fetchMedialDetails("tv", 1, sessionId));
+		// dispatch(fetchMedialDetails("tv", 1, sessionId));
 	}, [dispatch, sessionId]);
 	const switchToMovies = () => {
 		dispatch(fetchMedialDetails("movie", 1, sessionId));
