@@ -1,7 +1,7 @@
 import { useScrollTo } from "react-use-window-scroll";
 import { useDispatch } from "react-redux";
 // actions
-import { fetchMedialDetails } from "../../store/actions/userAction";
+import { fetchMedialDetails } from "../../store/actions/";
 
 const HomePages = ({ isMovie, isActive, setIsActive, sessionId }) => {
 	const scrollTo = useScrollTo();

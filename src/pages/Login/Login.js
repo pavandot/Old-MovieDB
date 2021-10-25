@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
 // actions
-import { fetchGetToken } from "../../store/actions/userAction";
+import { fetchGetToken } from "../../store/actions/";
 
 // component
 import LoginComp from "../../components/Login/LoginComp";

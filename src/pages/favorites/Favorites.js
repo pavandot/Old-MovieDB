@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchFavorites } from "../../store/actions/userAction";
+import { fetchFavorites } from "../../store/actions/";
 import FavoritesComp from "../../components/favorites/FavoritesComp";
 import { useSelector } from "react-redux";
 const sessionId = localStorage.getItem("sessionId");

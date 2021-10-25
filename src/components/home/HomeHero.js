@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { getSearchResult } from "../../store/actions/userAction";
+import { getSearchResult } from "../../store/actions/";
 
 // component
 const HomeHero = () => {

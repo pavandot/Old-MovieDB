@@ -1,6 +1,6 @@
 import { IoHeartCircle, IoCloseCircleOutline } from "react-icons/io5";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import { toggleFavorites, getFavoriteMovies, getFavoriteTv, getMovieById } from "../../store/actions/userAction";
+import { toggleFavorites, getFavoriteMovies, getFavoriteTv, getMovieById } from "../../store/actions/";
 import "react-circular-progressbar/dist/styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";

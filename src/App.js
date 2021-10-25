@@ -12,7 +12,7 @@ import Search from "./pages/search/Search";
 import Movie from "./pages/movie/Movie";
 
 // Actions
-import { fetchUser, setSessionId } from "./store/actions/userAction";
+import { fetchUser, setSessionId } from "./store/actions/";
 
 const sessionId = localStorage.getItem("sessionId");
 function App() {

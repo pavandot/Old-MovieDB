@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 //
 
 // actions
-import { fetchMedialDetails } from "../../store/actions/userAction";
+import { fetchMedialDetails } from "../../store/actions/";
 // Components
 import HomeHero from "../../components/home/HomeHero";
 import HomeShowcase from "../../components/home/HomeShowcase";
