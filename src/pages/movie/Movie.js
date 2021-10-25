@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import "./Movie.css";
 const Movie = () => {
 	const movie = useSelector((state) => state.user.movieDetails);
-	const { title, rating, releaseDate, genres, totalRunTime, tagLine, overview, backgroundPoster, posterPath } = movie;
+	const { title, rating, releaseDate, genres, totalRunTime, tagLine, overview, backgroundPoster, posterPath, isFavorite } = movie;
 	return (
 		<section className='sm:h-screen '>
 			<div className='hidden sm:block'>
@@ -42,7 +42,7 @@ const Movie = () => {
 							User <br /> Score
 						</p>
 						<div className='bg-primary ml-4 p-4 rounded-3xl'>
-							<FaHeart className=' text-white' />
+							<FaHeart className={`${isFavorite ? "text-red-600" : "text-white"}`} />
 						</div>
 						<div className='bg-primary ml-4 p-4 rounded-3xl'>
 							<FaBookmark />

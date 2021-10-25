@@ -71,10 +71,10 @@ const HomeShowcase = ({ Media, sessionId, isMovie, index }) => {
 	};
 	const sendID = () => {
 		if (isMovie) {
-			dispatch(getMovieById(id, history, "movie"));
+			dispatch(getMovieById(id, history, "movie", sessionId));
 		}
 		if (!isMovie) {
-			dispatch(getMovieById(id, history, "tv"));
+			dispatch(getMovieById(id, history, "tv", sessionId));
 		}
 	};
 	return (

@@ -293,13 +293,21 @@ export const getSearchResult = (keyWord) => async (dispatch, getState) => {
 // Get Movie
 const getMovie = (data) => ({ type: GET_MOVIE, payload: data });
 
-export const getMovieById = (id, history, media) => async (dispatch) => {
+export const getMovieById = (id, history, media, sessionId) => async (dispatch) => {
 	try {
 		const movieData = await axios.get(`https://api.themoviedb.org/3/${media}/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`).then((res) => res.data);
 		console.log(movieData);
 		let title = "";
 		let releaseDate = "";
 		let totalRunTime = "";
+		let isFavorite = false;
+		if (sessionId) {
+			isFavorite = await axios.get(`https://api.themoviedb.org/3/${media}/${id}/account_states?api_key=${process.env.REACT_APP_API_KEY}&session_id=${sessionId}`).then((res) => {
+				console.log(res.data);
+				return res.data.favorite;
+			});
+		}
+		console.log(isFavorite);
 		if (media === "movie") {
 			title = movieData.title;
 			releaseDate = movieData.release_date.replaceAll("-", "/");
@@ -326,7 +334,7 @@ export const getMovieById = (id, history, media) => async (dispatch) => {
 		const overview = movieData.overview;
 		const posterPath = `https://image.tmdb.org/t/p/w400/${movieData.poster_path}`;
 		const backgroundPoster = `https://image.tmdb.org/t/p/w500/${movieData.backdrop_path}`;
-		const data = { title, rating, releaseDate, genres, totalRunTime, tagLine, overview, backgroundPoster, posterPath };
+		const data = { title, rating, releaseDate, genres, totalRunTime, tagLine, overview, backgroundPoster, posterPath, isFavorite };
 		console.log(data);
 		dispatch(getMovie(data));
 		history.push("/movie");
