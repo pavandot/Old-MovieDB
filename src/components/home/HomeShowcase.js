@@ -78,7 +78,7 @@ const HomeShowcase = ({ Media, sessionId, isMovie, index }) => {
 		}
 	};
 	return (
-		<section className='inline-block h-72'>
+		<section className='inline-block h-72 w-full'>
 			<div className='rounded-lg  relative h-full '>
 				<img src={posterImg} alt={title} className='rounded-lg h-full w-full object-fill cursor-pointer' onClick={sendID} />
 				{!!sessionId && (

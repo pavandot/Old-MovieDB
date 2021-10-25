@@ -52,7 +52,7 @@ const Home = () => {
 					</div>
 				</div>
 			</div>
-			<div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 m-4 sm:m-6 md:m-10'>
+			<div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 m-4 sm:m-6 md:m-10 '>
 				{isMovie &&
 					!!movies &&
 					movies.map((movie, index) => {
