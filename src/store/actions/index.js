@@ -6,7 +6,7 @@ export { fetchGetToken, setSessionId, fetchUser } from "./userLogin";
 
 // Getting movies and tv Shows
 
-export { fetchMedialDetails, getMovieDetails, getTvDetails, getFavoriteMovies, getFavoriteTv, fetchFavorites, toggleFavorites, getMovieById } from "./getMedia";
+export { fetchMedialDetails, getMovieDetails, getTvDetails, getFavoriteMovies, getFavoriteTv, fetchFavorites, toggleFavorites, getMovieById, getMovie } from "./getMedia";
 
 //  Search movies and tv Shows
 

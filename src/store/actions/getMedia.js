@@ -110,11 +110,13 @@ export const fetchFavorites = (mediaType, page, session_id) => (dispatch, getSta
 // toggle favorites
 export const toggleFavorites = (body, session_id, media_type) => (dispatch, getState) => {
 	console.log(session_id);
-	axios.post(`https://api.themoviedb.org/3/account/11236813/favorite?api_key=${process.env.REACT_APP_API_KEY}&session_id=${session_id}`, body).then((res) => {});
+	axios.post(`https://api.themoviedb.org/3/account/11236813/favorite?api_key=${process.env.REACT_APP_API_KEY}&session_id=${session_id}`, body).then((res) => {
+		console.log(res);
+	});
 };
 
 // Get Movie
-const getMovie = (data) => ({ type: GET_MOVIE, payload: data });
+export const getMovie = (data) => ({ type: GET_MOVIE, payload: data });
 
 export const getMovieById = (id, history, media, sessionId) => async (dispatch) => {
 	try {
@@ -124,6 +126,7 @@ export const getMovieById = (id, history, media, sessionId) => async (dispatch) 
 		let releaseDate = "";
 		let totalRunTime = "";
 		let isFavorite = false;
+		let isMovie = true;
 		if (sessionId) {
 			isFavorite = await axios.get(`https://api.themoviedb.org/3/${media}/${id}/account_states?api_key=${process.env.REACT_APP_API_KEY}&session_id=${sessionId}`).then((res) => {
 				console.log(res.data);
@@ -143,6 +146,7 @@ export const getMovieById = (id, history, media, sessionId) => async (dispatch) 
 			title = movieData.name;
 			releaseDate = movieData.first_air_date.replaceAll("-", "/");
 			totalRunTime = `${movieData.runtime}m`;
+			isMovie = false;
 		}
 		const rating = movieData.vote_average * 10;
 		let genres = [];
@@ -157,7 +161,7 @@ export const getMovieById = (id, history, media, sessionId) => async (dispatch) 
 		const overview = movieData.overview;
 		const posterPath = `https://image.tmdb.org/t/p/w400/${movieData.poster_path}`;
 		const backgroundPoster = `https://image.tmdb.org/t/p/w500/${movieData.backdrop_path}`;
-		const data = { title, rating, releaseDate, genres, totalRunTime, tagLine, overview, backgroundPoster, posterPath, isFavorite };
+		const data = { id, title, rating, releaseDate, genres, totalRunTime, tagLine, overview, backgroundPoster, posterPath, isFavorite, isMovie };
 		console.log(data);
 		dispatch(getMovie(data));
 		history.push("/movie");

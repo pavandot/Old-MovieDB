@@ -1,11 +1,54 @@
-import React from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { FaBookmark, FaHeart } from "react-icons/fa";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { toggleFavorites, getMovie } from "../../store/actions";
 import "./Movie.css";
 const Movie = () => {
-	const movie = useSelector((state) => state.user.movieDetails);
-	const { title, rating, releaseDate, genres, totalRunTime, tagLine, overview, backgroundPoster, posterPath, isFavorite } = movie;
+	const dispatch = useDispatch();
+	const media = useSelector((state) => state.user.movieDetails);
+	const sessionId = useSelector((state) => state.user.sessionId);
+	const { id, title, rating, releaseDate, genres, totalRunTime, tagLine, overview, backgroundPoster, posterPath, isFavorite, isMovie } = media;
+	const setIsFavorites = () => {
+		if (isMovie) {
+			if (isFavorite) {
+				const data = {
+					media_type: "movie",
+					media_id: id,
+					favorite: false,
+				};
+				dispatch(getMovie({ ...media, isFavorite: false }));
+				dispatch(toggleFavorites(data, sessionId));
+			} else {
+				const data = {
+					media_type: "movie",
+					media_id: id,
+					favorite: true,
+				};
+				dispatch(getMovie({ ...media, isFavorite: true }));
+				dispatch(toggleFavorites(data, sessionId));
+			}
+		}
+		if (!isMovie) {
+			if (isFavorite) {
+				const data = {
+					media_type: "tv",
+					media_id: id,
+					favorite: false,
+				};
+				dispatch(getMovie({ ...media, isFavorite: false }));
+				dispatch(toggleFavorites(data, sessionId));
+			} else {
+				const data = {
+					media_type: "tv",
+					media_id: id,
+					favorite: true,
+				};
+				dispatch(getMovie({ ...media, isFavorite: false }));
+				dispatch(toggleFavorites(data, sessionId));
+			}
+		}
+	};
 	return (
 		<section className='sm:h-screen '>
 			<div className='hidden sm:block'>
@@ -41,10 +84,10 @@ const Movie = () => {
 						<p className='font-bold ml-2'>
 							User <br /> Score
 						</p>
-						<div className='bg-primary ml-4 p-4 rounded-3xl'>
+						<div className='bg-primary ml-4 p-4 rounded-3xl cursor-pointer' onClick={setIsFavorites}>
 							<FaHeart className={`${isFavorite ? "text-red-600" : "text-white"}`} />
 						</div>
-						<div className='bg-primary ml-4 p-4 rounded-3xl'>
+						<div className='bg-primary ml-4 p-4 rounded-3xl cursor-pointer'>
 							<FaBookmark />
 						</div>
 					</div>
