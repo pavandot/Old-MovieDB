@@ -10,3 +10,4 @@ export const CHANGE_FAVORITE = "	CHANGE_FAVORITE";
 export const CLEAR_STORE = "CLEAR_STORE";
 export const SEARCH_RESULT = "SEARCH_RESULT";
 export const GET_MOVIE = "GET_MOVIE";
+export const SET_ALERT = "SET_ALERT";

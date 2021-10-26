@@ -1,5 +1,5 @@
 // Ui Actions
-export { setProgress } from "./uiActions";
+export { setProgress, setAlert } from "./uiActions";
 
 // User Login
 export { fetchGetToken, setSessionId, fetchUser } from "./userLogin";

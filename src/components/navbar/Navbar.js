@@ -4,12 +4,14 @@ import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { UserDropDown } from "./UserDropDown";
 import Loader from "../loader/Loader";
+import Alerts from "../alerts/Alerts";
 import "./Navbar.css";
 const Navbar = () => {
 	const dropDownRef = useRef();
 	const [isOpen, setIsOpen] = useState(false);
 	const sessionId = useSelector((state) => state.user.sessionId);
 	const ui = useSelector((state) => state.ui);
+	const { progressBar, alertMessage } = ui;
 	const img = useSelector((state) => state.user.user.img);
 	useEffect(() => {
 		const checkIfClickedOutside = (e) => {
@@ -53,7 +55,8 @@ const Navbar = () => {
 					</div>
 				</div>
 			</section>
-			{!ui.isHide && <Loader percentage={ui.progress} />}
+			{!progressBar.isHide && <Loader percentage={progressBar.progress} />}
+			{alertMessage.isVisible && <Alerts text={alertMessage.text} />}
 		</div>
 	);
 };

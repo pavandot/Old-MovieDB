@@ -1,6 +1,6 @@
 import axios from "axios";
 import { GET_TOKEN, SET_SESSION_ID, GET_USER_DETAILS } from "../action-types/actionTypes";
-import { setProgress } from "./index";
+import { setProgress, setAlert } from "./index";
 
 // Setting User Details
 const getToken = (token) => ({ type: GET_TOKEN, payload: token });
@@ -19,7 +19,13 @@ export const fetchGetToken = (userDetails) => async (dispatch) => {
 			password: userDetails.password,
 			request_token: token,
 		};
-		const verifiedToken = await axios.post(`${url}/token/validate_with_login?api_key=${process.env.REACT_APP_API_KEY}`, userData).then((res) => res.data.request_token);
+		const verifiedToken = await axios.post(`${url}/token/validate_with_login?api_key=${process.env.REACT_APP_API_KEY}`, userData).then((res) => {
+			console.log(res);
+			if (res.status >= 400) {
+				throw res;
+			}
+			return res.data.request_token;
+		});
 		dispatch(setProgress({ progress: 60, isHide: false, isCompleted: false }));
 		const payload = { request_token: verifiedToken };
 
@@ -39,7 +45,13 @@ export const fetchGetToken = (userDetails) => async (dispatch) => {
 		// Update the store
 		dispatch(getToken({ token, sessionId: userSessionID, user: { id, userName, img } }));
 	} catch (error) {
-		console.log(error);
+		dispatch(setProgress({ progress: 100, isHide: true, isCompleted: false }));
+		console.log(error.response);
+		const status = error.response.status;
+		const statusCode = error.response.data.status_code;
+		if (status === 401 && statusCode === 30) {
+			dispatch(setAlert({ text: "Invalid username and/or password", isVisible: true }));
+		}
 	}
 };
 
