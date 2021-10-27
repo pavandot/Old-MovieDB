@@ -28,6 +28,11 @@ export const UserDropDown = ({ setIsOpen }) => {
 						<h1>Favorite</h1>
 					</Link>
 				</div>
+				<div className='p-2 hover:bg-gray-200 rounded transition duration-300 text-gray-800 font-medium cursor-pointer sm:hidden' onClick={() => setIsOpen(false)}>
+					<Link to='/watchlist'>
+						<h1>Watch List</h1>
+					</Link>
+				</div>
 				<div className='p-2 hover:bg-gray-200 rounded transition duration-300 text-gray-800 font-medium cursor-pointer' onClick={clearSession}>
 					<p>Logout</p>
 				</div>

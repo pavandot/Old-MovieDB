@@ -7,7 +7,7 @@ export const getWatchListTv = (data) => ({ type: GET_WATCHLIST_TV, payload: data
 
 export const getWatchList = (mediaType, session_id) => (dispatch) => {
 	axios.get(`https://api.themoviedb.org/3/account/%7Baccount_id%7D/watchlist/${mediaType}?api_key=${process.env.REACT_APP_API_KEY}&session_id=${session_id}&language=en-US&page=1`).then((res) => {
-		console.log(res);
+		// console.log(res);
 		let data = [];
 		if (res.data.results) {
 			let totalPage = res.data.total_pages;
@@ -29,7 +29,7 @@ export const getWatchList = (mediaType, session_id) => (dispatch) => {
 				const date = `${month_names_short[parseInt(dateSplit[1]) - 1]} ${dateSplit[2]}, ${dateSplit[0]}`;
 				data = [...data, { id: element.id, title, posterImg, rating, date, overview, totalPage }];
 			});
-			console.log(data);
+			// console.log(data);
 		}
 		if (mediaType === "movies") {
 			dispatch(getWatchListMovie(data));
@@ -42,6 +42,6 @@ export const getWatchList = (mediaType, session_id) => (dispatch) => {
 
 export const toggleWishList = (body, session_id) => (dispatch) => {
 	axios.post(`https://api.themoviedb.org/3/account/%7Baccount_id%7D/watchlist?api_key=${process.env.REACT_APP_API_KEY}&session_id=${session_id}`, body).then((res) => {
-		console.log(res);
+		// console.log(res);
 	});
 };

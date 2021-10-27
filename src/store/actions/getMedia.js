@@ -137,7 +137,7 @@ export const getMovieById = (id, history, media, sessionId) => async (dispatch) 
 			isFavorite = isUser.isFavorite;
 			isWatchList = isUser.isWatchList;
 		}
-		console.log(isFavorite);
+		// console.log(isFavorite);
 		if (media === "movie") {
 			title = movieData.title;
 			releaseDate = movieData.release_date.replaceAll("-", "/");
@@ -155,7 +155,7 @@ export const getMovieById = (id, history, media, sessionId) => async (dispatch) 
 		const rating = movieData.vote_average * 10;
 		let genres = [];
 		movieData.genres.forEach((gen, index) => {
-			console.log(index);
+			// console.log(index);
 			if (index <= 1) {
 				genres.push(`${gen.name}`);
 			}
