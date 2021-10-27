@@ -44,7 +44,7 @@ const Movie = () => {
 					media_id: id,
 					favorite: true,
 				};
-				dispatch(getMovie({ ...media, isFavorite: false }));
+				dispatch(getMovie({ ...media, isFavorite: true }));
 				dispatch(toggleFavorites(data, sessionId));
 			}
 		}

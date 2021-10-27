@@ -4,7 +4,7 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { useState } from "react";
 // import { GET_MOVIE_DETAILS } from "../../store/action-types/actionTypes";
-import { toggleFavorites, getMovieDetails, getTvDetails, getMovieById } from "../../store/actions/";
+import { toggleFavorites, getMovieDetails, getTvDetails, getMovieById, getWatchListMovie, getWatchListTv, toggleWishList } from "../../store/actions/";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import "../../pages/home/Home.css";
@@ -13,61 +13,34 @@ const HomeShowcase = ({ Media, sessionId, isMovie, index }) => {
 	const movies = useSelector((state) => state.user.movies);
 	const tv = useSelector((state) => state.user.tv);
 	const [isMovieMenu, setIsMovieMenu] = useState(false);
-	const [isWatchList, setIsWatchList] = useState(false);
-	const { id, title, posterImg, rating, date, isFavorite } = Media;
+	// const [isWatchList, setIsWatchList] = useState(false);
+	const { id, title, posterImg, rating, date, isFavorite, isWatchList } = Media;
 	const dispatch = useDispatch();
 	const history = useHistory();
-	let alterData = [];
-	if (isMovie) {
-		alterData = movies;
-	}
-	if (!isMovie) {
-		alterData = tv;
-	}
+	let alterData = isMovie ? movies : tv;
+
 	const favoriteHandler = () => {
 		setIsMovieMenu(false);
-		if (isMovie) {
-			if (isFavorite) {
-				const data = {
-					media_type: "movie",
-					media_id: id,
-					favorite: false,
-				};
-				alterData[index].isFavorite = false;
-				dispatch(getMovieDetails(alterData));
-				dispatch(toggleFavorites(data, sessionId));
-			} else {
-				const data = {
-					media_type: "movie",
-					media_id: id,
-					favorite: true,
-				};
-				alterData[index].isFavorite = true;
-				dispatch(getMovieDetails(alterData));
-				dispatch(toggleFavorites(data, sessionId));
-			}
-		}
-		if (!isMovie) {
-			if (isFavorite) {
-				const data = {
-					media_type: "tv",
-					media_id: id,
-					favorite: false,
-				};
-				alterData[index].isFavorite = false;
-				dispatch(getTvDetails(alterData));
-				dispatch(toggleFavorites(data, sessionId));
-			} else {
-				const data = {
-					media_type: "tv",
-					media_id: id,
-					favorite: true,
-				};
-				alterData[index].isFavorite = true;
-				dispatch(getTvDetails(alterData));
-				dispatch(toggleFavorites(data, sessionId));
-			}
-		}
+		const data = {
+			media_type: isMovie ? "movie" : "tv",
+			media_id: id,
+			favorite: !isFavorite,
+		};
+		alterData[index].isFavorite = !isFavorite;
+		isMovie ? dispatch(getMovieDetails(alterData)) : dispatch(getTvDetails(alterData));
+		dispatch(toggleFavorites(data, sessionId));
+	};
+
+	const watchListHandler = () => {
+		setIsMovieMenu(false);
+		const data = {
+			media_type: isMovie ? "movie" : "tv",
+			media_id: id,
+			watchlist: !isWatchList,
+		};
+		alterData[index].isWatchList = !isWatchList;
+		isMovie ? dispatch(getMovieDetails(alterData)) : dispatch(getTvDetails(alterData));
+		dispatch(toggleWishList(data, sessionId));
 	};
 	const sendID = () => {
 		if (isMovie) {
@@ -98,7 +71,7 @@ const HomeShowcase = ({ Media, sessionId, isMovie, index }) => {
 							</p>
 						</div>
 						<div className=' px-3 py-1 hover:bg-gray-200 '>
-							<p className=' flex justify-start items-center cursor-pointer' onClick={() => setIsWatchList(!isWatchList)}>
+							<p className=' flex justify-start items-center cursor-pointer' onClick={watchListHandler}>
 								<span className='pr-2'>
 									{!isWatchList && <BsBookmark />}
 									{isWatchList && <BsFillBookmarkCheckFill className='cursor-pointer' />}

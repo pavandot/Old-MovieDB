@@ -15,3 +15,7 @@ export { getSearchResult } from "./searchMedia";
 // common actions
 
 export { clearReduxStore } from "./common";
+
+// watch list
+
+export { getWatchListMovie, getWatchListTv, toggleWishList } from "./watch-list";

@@ -7,6 +7,8 @@ const initialState = {
 	tv: [],
 	favoriteMovies: [],
 	favoriteTv: [],
+	watchListedMovies: [],
+	watchListTv: [],
 	searchResult: { moviesRes: { movies: [], totalPages: 0, totalResult: 0 }, tvShows: {} },
 	movieDetails: {},
 };
