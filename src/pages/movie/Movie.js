@@ -1,53 +1,32 @@
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { FaBookmark, FaHeart } from "react-icons/fa";
+import { BsBookmark, BsBookmarkCheckFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { toggleFavorites, getMovie } from "../../store/actions";
+import { toggleFavorites, getMovie, toggleWishList } from "../../store/actions";
 import "./Movie.css";
 const Movie = () => {
 	const dispatch = useDispatch();
 	const media = useSelector((state) => state.user.movieDetails);
 	const sessionId = useSelector((state) => state.user.sessionId);
-	const { id, title, rating, releaseDate, genres, totalRunTime, tagLine, overview, backgroundPoster, posterPath, isFavorite, isMovie } = media;
+	const { id, title, rating, releaseDate, genres, totalRunTime, tagLine, overview, backgroundPoster, posterPath, isFavorite, isMovie, isWatchList } = media;
 	const setIsFavorites = () => {
-		if (isMovie) {
-			if (isFavorite) {
-				const data = {
-					media_type: "movie",
-					media_id: id,
-					favorite: false,
-				};
-				dispatch(getMovie({ ...media, isFavorite: false }));
-				dispatch(toggleFavorites(data, sessionId));
-			} else {
-				const data = {
-					media_type: "movie",
-					media_id: id,
-					favorite: true,
-				};
-				dispatch(getMovie({ ...media, isFavorite: true }));
-				dispatch(toggleFavorites(data, sessionId));
-			}
-		}
-		if (!isMovie) {
-			if (isFavorite) {
-				const data = {
-					media_type: "tv",
-					media_id: id,
-					favorite: false,
-				};
-				dispatch(getMovie({ ...media, isFavorite: false }));
-				dispatch(toggleFavorites(data, sessionId));
-			} else {
-				const data = {
-					media_type: "tv",
-					media_id: id,
-					favorite: true,
-				};
-				dispatch(getMovie({ ...media, isFavorite: true }));
-				dispatch(toggleFavorites(data, sessionId));
-			}
-		}
+		const data = {
+			media_type: isMovie ? "movie" : "tv",
+			media_id: id,
+			favorite: !isFavorite,
+		};
+		dispatch(getMovie({ ...media, isFavorite: !isFavorite }));
+		dispatch(toggleFavorites(data, sessionId));
+	};
+	const watchListHandler = () => {
+		const data = {
+			media_type: isMovie ? "movie" : "tv",
+			media_id: id,
+			watchlist: !isWatchList,
+		};
+		dispatch(getMovie({ ...media, isWatchList: !isWatchList }));
+		dispatch(toggleWishList(data, sessionId));
 	};
 	return (
 		<section className='sm:h-screen '>
@@ -87,8 +66,8 @@ const Movie = () => {
 						<div className='bg-primary ml-4 p-4 rounded-3xl cursor-pointer' onClick={setIsFavorites}>
 							<FaHeart className={`${isFavorite ? "text-red-600" : "text-white"}`} />
 						</div>
-						<div className='bg-primary ml-4 p-4 rounded-3xl cursor-pointer'>
-							<FaBookmark />
+						<div className='bg-primary ml-4 p-4 rounded-3xl cursor-pointer' onClick={watchListHandler}>
+							{isWatchList ? <BsBookmarkCheckFill className='text-white' /> : <BsBookmark />}
 						</div>
 					</div>
 					<p className='mb-3 italic text-gray-300'>{tagLine}</p>

@@ -10,6 +10,7 @@ import Login from "./pages/Login/Login";
 import Favorites from "./pages/favorites/Favorites";
 import Search from "./pages/search/Search";
 import Movie from "./pages/movie/Movie";
+import WatchList from "./pages/watch-list/WatchList";
 
 // Actions
 import { fetchUser, setSessionId } from "./store/actions/";
@@ -42,6 +43,9 @@ function App() {
 					</Route>
 					<Route path='/movie'>
 						<Movie />
+					</Route>
+					<Route to='/watchlist'>
+						<WatchList />
 					</Route>
 				</Switch>
 				<Footer />

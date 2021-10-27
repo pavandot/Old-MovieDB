@@ -18,4 +18,4 @@ export { clearReduxStore } from "./common";
 
 // watch list
 
-export { getWatchListMovie, getWatchListTv, toggleWishList } from "./watch-list";
+export { getWatchListMovie, getWatchListTv, toggleWishList, getWatchList } from "./watch-list";
