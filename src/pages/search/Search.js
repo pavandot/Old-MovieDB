@@ -6,8 +6,8 @@ import "./Search.css";
 const Search = () => {
 	const [isMovie, setIsMovie] = useState(true);
 	const { moviesRes, tvShows } = useSelector((state) => state.user.searchResult);
-	const { movies, totalPages, totalResult } = moviesRes;
-	const { tvShowsArr, tvTotalPages, tvTotalResult } = tvShows;
+	const { movies } = moviesRes;
+	const { tvShowsArr } = tvShows;
 	console.log(moviesRes);
 	return (
 		<section className='mt-16 w-full'>

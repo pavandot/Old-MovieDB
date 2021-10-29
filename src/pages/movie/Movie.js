@@ -1,5 +1,5 @@
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import { FaBookmark, FaHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 import { BsBookmark, BsBookmarkCheckFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -63,10 +63,10 @@ const Movie = () => {
 						<p className='font-bold ml-2'>
 							User <br /> Score
 						</p>
-						<div className='bg-primary ml-4 p-4 rounded-3xl cursor-pointer' onClick={setIsFavorites}>
+						<div className={`bg-primary ml-4 p-4 rounded-3xl cursor-pointer ${sessionId ? "block" : "hidden"} `} onClick={setIsFavorites}>
 							<FaHeart className={`${isFavorite ? "text-red-600" : "text-white"}`} />
 						</div>
-						<div className='bg-primary ml-4 p-4 rounded-3xl cursor-pointer' onClick={watchListHandler}>
+						<div className={`bg-primary ml-4 p-4 rounded-3xl cursor-pointer ${sessionId ? "block" : "hidden"}`} onClick={watchListHandler}>
 							{isWatchList ? <BsBookmarkCheckFill className='text-white' /> : <BsBookmark />}
 						</div>
 					</div>

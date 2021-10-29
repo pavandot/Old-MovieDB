@@ -4,7 +4,7 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { useState } from "react";
 // import { GET_MOVIE_DETAILS } from "../../store/action-types/actionTypes";
-import { toggleFavorites, getMovieDetails, getTvDetails, getMovieById, getWatchListMovie, getWatchListTv, toggleWishList } from "../../store/actions/";
+import { toggleFavorites, getMovieDetails, getTvDetails, getMovieById, toggleWishList } from "../../store/actions/";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import "../../pages/home/Home.css";

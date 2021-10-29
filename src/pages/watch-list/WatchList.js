@@ -26,7 +26,7 @@ const WatchList = () => {
 		setIsMovie(false);
 	};
 	return (
-		<section>
+		<section className='min-h-screen'>
 			<p className='m-10'>1</p>
 			<div className=' m-10  flex items-center'>
 				<p className='text-2xl font-semibold'>My Watch List</p>
