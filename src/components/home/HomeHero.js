@@ -1,11 +1,11 @@
 import { useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { getSearchResult } from "../../store/actions/";
 
 // component
 const HomeHero = () => {
-	const searchResult = useSelector((state) => state.user.searchResult);
+	// const searchResult = useSelector((state) => state.user.searchResult);
 	const searchRef = useRef();
 	const dispatch = useDispatch();
 	const history = useHistory();

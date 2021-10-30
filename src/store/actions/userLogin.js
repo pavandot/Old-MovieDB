@@ -32,7 +32,7 @@ export const fetchGetToken = (userDetails) => async (dispatch) => {
 		// Get the Session Id
 		const userSessionID = await axios.post(`${url}/session/new?api_key=${process.env.REACT_APP_API_KEY}`, payload).then((res) => res.data.session_id);
 		dispatch(setProgress({ progress: 80, isHide: false, isCompleted: false }));
-		const encodedData = btoa(userSessionID);
+		// const encodedData = btoa(userSessionID);
 		localStorage.setItem("sessionId", userSessionID);
 
 		// Get The User Details
