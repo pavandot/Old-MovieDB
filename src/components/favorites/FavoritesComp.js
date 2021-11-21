@@ -1,4 +1,5 @@
 import { IoHeartCircle, IoCloseCircleOutline } from "react-icons/io5";
+import { motion, AnimatePresence } from "framer-motion";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { toggleFavorites, getFavoriteMovies, getFavoriteTv, getMovieById } from "../../store/actions/";
 import "react-circular-progressbar/dist/styles.css";
@@ -43,7 +44,7 @@ const FavoritesComp = ({ Media, isMovie, movies, tv }) => {
 		}
 	};
 	return (
-		<section className=''>
+		<motion.section key={id} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
 			<div className='rounded-lg  h-full flex flex-col sm:flex-row border-2 relative'>
 				<div className='relative'>
 					<img src={posterImg} alt={title} width='133' height='200' className=' w-full sm:hidden rounded-t-lg object-fill cursor-pointer ' onClick={sendID} />
@@ -103,7 +104,7 @@ const FavoritesComp = ({ Media, isMovie, movies, tv }) => {
 					</div>
 				</div>
 			</div>
-		</section>
+		</motion.section>
 	);
 };
 

@@ -1,4 +1,5 @@
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { motion, AnimatePresence } from "framer-motion";
 import { BsFillBookmarkCheckFill, BsBookmark, BsThreeDots } from "react-icons/bs";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
@@ -51,7 +52,7 @@ const HomeShowcase = ({ Media, sessionId, isMovie, index }) => {
 		}
 	};
 	return (
-		<section className='inline-block h-72 w-full'>
+		<motion.section className='inline-block h-72 w-full ' initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
 			<div className='rounded-lg  relative h-full '>
 				<img src={posterImg} alt={title} className='rounded-lg h-full w-full object-fill cursor-pointer' onClick={sendID} />
 				{!!sessionId && (
@@ -59,28 +60,30 @@ const HomeShowcase = ({ Media, sessionId, isMovie, index }) => {
 						<BsThreeDots />
 					</div>
 				)}
-				{isMovieMenu && (
-					<div className='absolute movie-menu  bg-white rounded border-2'>
-						<div className='px-3 py-1 hover:bg-gray-200 '>
-							<p className=' flex justify-start items-center cursor-pointer' onClick={favoriteHandler}>
-								<span className='pr-2'>
-									{!isFavorite && <AiOutlineHeart />}
-									{isFavorite && <AiFillHeart className=' text-red-500 cursor-pointer' />}
-								</span>
-								Favorite
-							</p>
-						</div>
-						<div className=' px-3 py-1 hover:bg-gray-200 '>
-							<p className=' flex justify-start items-center cursor-pointer' onClick={watchListHandler}>
-								<span className='pr-2'>
-									{!isWatchList && <BsBookmark />}
-									{isWatchList && <BsFillBookmarkCheckFill className='cursor-pointer' />}
-								</span>
-								Watch List
-							</p>
-						</div>
-					</div>
-				)}
+				<AnimatePresence>
+					{isMovieMenu && (
+						<motion.div className='absolute movie-menu  bg-white rounded border-2' initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}>
+							<div className='px-3 py-1 hover:bg-gray-200 '>
+								<p className=' flex justify-start items-center cursor-pointer' onClick={favoriteHandler}>
+									<span className='pr-2'>
+										{!isFavorite && <AiOutlineHeart />}
+										{isFavorite && <AiFillHeart className=' text-red-500 cursor-pointer' />}
+									</span>
+									Favorite
+								</p>
+							</div>
+							<div className=' px-3 py-1 hover:bg-gray-200 '>
+								<p className=' flex justify-start items-center cursor-pointer' onClick={watchListHandler}>
+									<span className='pr-2'>
+										{!isWatchList && <BsBookmark />}
+										{isWatchList && <BsFillBookmarkCheckFill className='cursor-pointer' />}
+									</span>
+									Watch List
+								</p>
+							</div>
+						</motion.div>
+					)}
+				</AnimatePresence>
 
 				<div className='w-10 font-bold absolute z-40 rating-position'>
 					<CircularProgressbar
@@ -102,7 +105,7 @@ const HomeShowcase = ({ Media, sessionId, isMovie, index }) => {
 				<p className=' font-bold'>{title}</p>
 				<p className=' text-gray-500'>{date}</p>
 			</div>
-		</section>
+		</motion.section>
 	);
 };
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { BsBookmarkCheckFill } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
@@ -30,7 +31,7 @@ const WishListComp = ({ Media, isMovie, movies, tv }) => {
 		}
 	};
 	return (
-		<section className=''>
+		<motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
 			<div className='rounded-lg  h-full flex flex-col sm:flex-row border-2 relative'>
 				<div className='relative'>
 					<img src={posterImg} alt={title} width='133' height='200' className=' w-full sm:hidden rounded-t-lg object-fill cursor-pointer ' onClick={sendID} />
@@ -90,7 +91,7 @@ const WishListComp = ({ Media, isMovie, movies, tv }) => {
 					</div>
 				</div>
 			</div>
-		</section>
+		</motion.section>
 	);
 };
 
