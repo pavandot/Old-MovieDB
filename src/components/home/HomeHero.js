@@ -18,10 +18,10 @@ const HomeHero = () => {
 		}, 750);
 	};
 	return (
-		<section className=' h-80 relative overflow-hidden mt-16' id='media-top'>
+		<section className=' h-80 relative overflow-hidden mt-16 ' id='media-top'>
 			<img src='https://image.tmdb.org/t/p/original/VuukZLgaCrho2Ar8Scl9HtV3yD.jpg' alt='img' className='w-full h-full sm:h-auto bg-contain ' />
-			<div className='absolute bg-primary top-0 bottom-0 left-0 w-full bg-opacity-60'>
-				<div className=' m-4 sm:m-6 md:m-10 '>
+			<div className='absolute bg-primary top-0 bottom-0 left-0 w-full bg-opacity-60 '>
+				<div className=' m-4 sm:my-6 md:my-10 max-w-5xl mx-auto'>
 					<div>
 						<h1 className='text-4xl sm:text-4xl pb-2 md:text-6xl font-bold text-white pt-5'>Welcome.</h1>
 						<p className=' text-lg sm:text-1xl md:text-3xl text-white font-bold'>Millions of movies, TV shows and people to discover. Explore now.</p>
