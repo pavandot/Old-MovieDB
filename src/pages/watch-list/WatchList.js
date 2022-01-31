@@ -28,8 +28,8 @@ const WatchList = () => {
 	return (
 		<section className='min-h-screen'>
 			<p className='m-10'>1</p>
-			<div className=' m-10  flex items-center'>
-				<p className='text-2xl font-semibold'>My Watch List</p>
+			<div className=' m-10  flex items-center max-w-7xl xl:mx-auto mx-5 md:mx-10  '>
+				<p className=' text-xl md:text-2xl font-semibold'>My Watch List</p>
 				<div className='flex items-center mx-5 border-2 border-primary rounded-3xl  justify-between'>
 					<div className={`py-1 px-3 ${isMovie ? "rounded-3xl bg-primary text-white " : "rounded-tl-3xl rounded-bl-3xl bg-white text-gray-800"} cursor-pointer `} onClick={switchToMovies}>
 						<p>Movies</p>

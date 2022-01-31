@@ -32,7 +32,7 @@ const WishListComp = ({ Media, isMovie, movies, tv }) => {
 	};
 	return (
 		<motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-			<div className='rounded-lg  h-full flex flex-col sm:flex-row border-2 relative'>
+			<div className='rounded-lg  h-full flex flex-col sm:flex-row border-2 relative max-w-7xl mx-auto'>
 				<div className='relative'>
 					<img src={posterImg} alt={title} width='133' height='200' className=' w-full sm:hidden rounded-t-lg object-fill cursor-pointer ' onClick={sendID} />
 					<div className='w-10 font-bold absolute rating-position sm:hidden '>
