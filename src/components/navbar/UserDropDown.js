@@ -1,19 +1,19 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 import { clearReduxStore } from "../../store/actions/";
 export const UserDropDown = ({ setIsOpen }) => {
 	const { userName, img } = useSelector((state) => state.user.user);
 	console.log(img);
-	const history = useHistory();
+	const history = useNavigate();
 	const dispatch = useDispatch();
 	const clearSession = () => {
 		setIsOpen(false);
 		localStorage.clear();
 		dispatch(clearReduxStore());
-		history.replace("/");
+		history("/");
 		window.location.reload();
 	};
 	return (

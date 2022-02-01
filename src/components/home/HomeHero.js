@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { getSearchResult } from "../../store/actions/";
 
 // component
@@ -8,13 +8,13 @@ const HomeHero = () => {
 	// const searchResult = useSelector((state) => state.user.searchResult);
 	const searchRef = useRef();
 	const dispatch = useDispatch();
-	const history = useHistory();
+	const history = useNavigate();
 	const submitHandler = (e) => {
 		e.preventDefault();
 		dispatch(getSearchResult(searchRef.current.value));
 		setTimeout(() => {
 			searchRef.current.value = "";
-			history.push("/search");
+			history("/search");
 		}, 750);
 	};
 	return (

@@ -9,7 +9,7 @@ import { toggleFavorites, getMovieDetails, getTvDetails, getMovieById, toggleWis
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import "../../pages/home/Home.css";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 const HomeShowcase = ({ Media, sessionId, isMovie, index }) => {
 	const movies = useSelector((state) => state.user.movies);
 	const tv = useSelector((state) => state.user.tv);
@@ -17,7 +17,7 @@ const HomeShowcase = ({ Media, sessionId, isMovie, index }) => {
 	// const [isWatchList, setIsWatchList] = useState(false);
 	const { id, title, posterImg, rating, date, isFavorite, isWatchList } = Media;
 	const dispatch = useDispatch();
-	const history = useHistory();
+	const navigateTo = useNavigate();
 	let alterData = isMovie ? movies : tv;
 
 	const favoriteHandler = () => {
@@ -45,10 +45,10 @@ const HomeShowcase = ({ Media, sessionId, isMovie, index }) => {
 	};
 	const sendID = () => {
 		if (isMovie) {
-			dispatch(getMovieById(id, history, "movie", sessionId));
+			dispatch(getMovieById(id, navigateTo, "movie", sessionId));
 		}
 		if (!isMovie) {
-			dispatch(getMovieById(id, history, "tv", sessionId));
+			dispatch(getMovieById(id, navigateTo, "tv", sessionId));
 		}
 	};
 	return (

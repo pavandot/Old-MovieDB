@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // pages
 import Navbar from "./components/navbar/Navbar";
@@ -26,30 +26,18 @@ function App() {
 	}, [dispatch]);
 	return (
 		<section>
-			<Router>
+			<BrowserRouter>
 				<Navbar />
-				<Switch>
-					<Route exact path='/'>
-						<Home />
-					</Route>
-					<Route path='/favorites'>
-						<Favorites />
-					</Route>
-					<Route path='/login'>
-						<Login />
-					</Route>
-					<Route path='/search'>
-						<Search />
-					</Route>
-					<Route path='/movie'>
-						<Movie />
-					</Route>
-					<Route to='/watchlist'>
-						<WatchList />
-					</Route>
-				</Switch>
+				<Routes>
+					<Route index element={<Home />} />
+					<Route path='/favorites' element={<Favorites />} />
+					<Route path='/login' element={<Login />} />
+					<Route path='/search' element={<Search />} />
+					<Route path='/movie' element={<Movie />} />
+					<Route path='/watchlist' element={<WatchList />} />
+				</Routes>
 				<Footer />
-			</Router>
+			</BrowserRouter>
 		</section>
 	);
 }

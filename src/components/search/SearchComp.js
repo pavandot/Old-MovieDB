@@ -1,10 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { getMovieById } from "../../store/actions/";
 const SearchComp = ({ media, isMovie }) => {
 	const dispatch = useDispatch();
-	const history = useHistory();
+	const history = useNavigate();
 	const { id, title, posterImg, overview, date } = media;
 	let shortOverview = "";
 	if (overview.length > 229) {

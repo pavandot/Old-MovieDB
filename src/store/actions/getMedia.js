@@ -28,7 +28,7 @@ export const fetchMedialDetails = (mediaType, page, session_id) => (dispatch, ge
 							dateSplit = element.first_air_date.split("-");
 							title = element.name;
 						}
-						axios.get(``);
+						// axios.get(``);
 
 						const date = `${month_names_short[parseInt(dateSplit[1]) - 1]} ${dateSplit[2]}, ${dateSplit[0]}`;
 						data = [...data, { id: element.id, title, posterImg, rating, date, isFavorite, isWatchList }];
@@ -118,7 +118,7 @@ export const toggleFavorites = (body, session_id, media_type) => (dispatch, getS
 // Get Movie
 export const getMovie = (data) => ({ type: GET_MOVIE, payload: data });
 
-export const getMovieById = (id, history, media, sessionId) => async (dispatch) => {
+export const getMovieById = (id, navigateTo, media, sessionId) => async (dispatch) => {
 	try {
 		const movieData = await axios.get(`https://api.themoviedb.org/3/${media}/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`).then((res) => res.data);
 		// console.log(movieData);
@@ -168,7 +168,7 @@ export const getMovieById = (id, history, media, sessionId) => async (dispatch) 
 		const data = { id, title, rating, releaseDate, genres, totalRunTime, tagLine, overview, backgroundPoster, posterPath, isFavorite, isWatchList, isMovie };
 		// console.log(data);
 		dispatch(getMovie(data));
-		history.push("/movie");
+		navigateTo("/movie");
 	} catch (error) {
 		// console.log(error);
 	}

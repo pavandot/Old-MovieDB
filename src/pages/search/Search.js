@@ -1,20 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import SearchComp from "../../components/search/SearchComp";
 import "./Search.css";
 const Search = () => {
+	const navigateTo = useNavigate();
 	const [isMovie, setIsMovie] = useState(true);
 	const { moviesRes, tvShows } = useSelector((state) => state.user.searchResult);
 	const { movies } = moviesRes;
 	const { tvShowsArr } = tvShows;
+	useEffect(() => {
+		if (!movies || !tvShowsArr) {
+			navigateTo("/");
+		}
+	}, [movies, tvShowsArr, navigateTo]);
 	console.log(moviesRes);
 	return (
-		<section className='mt-16 w-full'>
-			<div className='flex items-center border-2 py-3 px-10 space-x-2'>
+		<section className='mt-20 w-full'>
+			{/* <div className='flex items-center border-2 py-3 px-10 space-x-2'>
 				<BiSearch className='text-lg ' />
 				<input type='text' placeholder='matrix' className='w-full outline-none italic' />
-			</div>
+			</div> */}
 			<div className='flex flex-col	sm:flex-row  sm:justify-between sm:mx-10 sm:my-5 sm:space-x-5'>
 				<div className=' hidden sm:block w-1/4 shadow-md rounded-lg self-start'>
 					<h1 className='bg-blue-400 text-left h-16 p-5 font-bold  text-lg text-white rounded-t-lg'>Search Results</h1>
@@ -53,7 +60,7 @@ const Search = () => {
 						tvShowsArr.length > 0 &&
 						tvShowsArr.map((tv) => {
 							return (
-								<div>
+								<div key={tv.id}>
 									<SearchComp media={tv} isMovie={isMovie} />
 								</div>
 							);

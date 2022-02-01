@@ -337,7 +337,7 @@ export const getMovieById = (id, history, media, sessionId) => async (dispatch) 
 		const data = { title, rating, releaseDate, genres, totalRunTime, tagLine, overview, backgroundPoster, posterPath, isFavorite };
 		console.log(data);
 		dispatch(getMovie(data));
-		history.push("/movie");
+		history("/movie");
 	} catch (error) {
 		console.log(error);
 	}

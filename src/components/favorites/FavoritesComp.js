@@ -4,12 +4,12 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { toggleFavorites, getFavoriteMovies, getFavoriteTv, getMovieById } from "../../store/actions/";
 import "react-circular-progressbar/dist/styles.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 const FavoritesComp = ({ Media, isMovie, movies, tv }) => {
 	const sessionId = useSelector((state) => state.user.sessionId);
 	const { id, title, posterImg, rating, date, overview } = Media;
 	const dispatch = useDispatch();
-	const history = useHistory();
+	const history = useNavigate();
 	const removeFavorite = () => {
 		if (isMovie) {
 			const alteredData = movies.filter((movie) => movie.id !== id);

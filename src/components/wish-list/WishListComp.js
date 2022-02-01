@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { BsBookmarkCheckFill } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { getWatchListMovie, getWatchListTv, toggleWishList, getMovieById } from "../../store/actions";
 
@@ -11,7 +11,7 @@ const WishListComp = ({ Media, isMovie, movies, tv }) => {
 	const sessionId = useSelector((state) => state.user.sessionId);
 	const { id, title, posterImg, rating, date, overview } = Media;
 	const dispatch = useDispatch();
-	const history = useHistory();
+	const history = useNavigate();
 	const removeWatchList = () => {
 		const alteredData = isMovie ? movies.filter((movie) => movie.id !== id) : tv.filter((tvItem) => tvItem.id !== id);
 		isMovie ? dispatch(getWatchListMovie(alteredData)) : dispatch(getWatchListTv(alteredData));

@@ -1,7 +1,5 @@
 module.exports = {
-	// mode: "jit",
-	// purge: ["./public/*.html", "./src/**/*.{js,jsx,ts,tsx,vue}"],
-	purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
+	content: ["./src/**/*.{js,jsx,ts,tsx}"],
 	darkMode: false, // or 'media' or 'class'
 	theme: {
 		extend: {
@@ -14,9 +12,6 @@ module.exports = {
 				sans: ["Source Sans Pro", "sans-serif"],
 			},
 		},
-	},
-	variants: {
-		extend: {},
 	},
 	plugins: [],
 };

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 // actions
 import { fetchGetToken } from "../../store/actions/";
@@ -13,7 +13,7 @@ const Login = () => {
 	const [userName, setUserName] = useState("");
 	const [password, setPassword] = useState("");
 	const userState = useSelector((state) => state.user);
-	const history = useHistory();
+	const history = useNavigate();
 	const dispatch = useDispatch();
 
 	const submitHandler = (e) => {
@@ -28,7 +28,7 @@ const Login = () => {
 	useEffect(() => {
 		if (userState.sessionId) {
 			// localStorage.setItem("sessionId", userState.sessionId);
-			history.replace("/");
+			history("/");
 		}
 	}, [history, userState.sessionId]);
 
