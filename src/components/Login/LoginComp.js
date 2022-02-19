@@ -17,7 +17,10 @@ const LoginComp = ({ userName, setUserName, password, setPassword, submitHandler
 				</a>{" "}
 				to have it resent.
 			</p>
-			<form className='py-10 ' onSubmit={submitHandler}>
+			<p className='mt-5'>Demo Account:</p>
+			<p className=' mt-3'>UserName: pavandot</p>
+			<p>Password: 0850</p>
+			<form className='py-5 ' onSubmit={submitHandler}>
 				<div className='flex flex-col pb-5'>
 					<label htmlFor='username'>Username</label>
 					<input type='text' id='username' className='p-2 outline-none border border-secondary mt-3' value={userName} onChange={(e) => setUserName(e.target.value)} />
